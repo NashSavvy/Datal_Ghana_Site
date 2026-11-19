@@ -56,6 +56,14 @@ h2{font-size:clamp(26px,5vw,36px);font-weight:700}
 .tabs button[data-id="telecel"]{background:#E60000;border-color:#E60000;color:#fff}
 .tabs button[data-id="ishare"]{background:linear-gradient(90deg,#E4002B,#1F4FD8);border-color:transparent;color:#fff}
 .tabs button[aria-selected="true"]{box-shadow:0 0 0 3px var(--bg),0 0 0 5px var(--ink);transform:translateY(-2px)}
+/* network selector showcase */
+.network-showcase{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:18px;align-items:stretch;background:var(--navy);border-radius:20px;overflow:hidden;margin:0 0 18px;min-height:210px}
+.network-showcase .tabs{align-content:center;align-items:center;justify-content:center;flex-wrap:wrap;overflow:visible;margin:0;padding:24px}
+.network-showcase .tabs button{min-width:112px}
+.network-photo{position:relative;min-height:210px;overflow:hidden;background:var(--navy)}
+.network-photo img{display:block;width:100%;height:100%;min-height:210px;object-fit:cover;object-position:center 42%;opacity:.9}
+.photo-wash{position:absolute;inset:0;background:linear-gradient(90deg,var(--navy) 0%,rgba(7,26,58,.38) 24%,rgba(7,26,58,.08) 100%);pointer-events:none}
+@media(max-width:699px){.network-showcase{grid-template-columns:1fr;gap:0}.network-showcase .tabs{padding:20px 14px 14px}.network-photo{min-height:170px}.network-photo img{min-height:170px;max-height:210px}.photo-wash{background:linear-gradient(180deg,var(--navy) 0%,rgba(7,26,58,.08) 45%,rgba(7,26,58,.16) 100%)}}
 .offer{display:grid;gap:16px;align-items:center}
 @media(min-width:700px){.offer{grid-template-columns:260px 1fr;gap:28px}}
 .tile{display:flex;flex-direction:column;gap:6px;padding:22px;border:2px solid var(--brand,var(--blue));border-radius:16px;background:var(--card)}
@@ -76,7 +84,14 @@ h2{font-size:clamp(26px,5vw,36px);font-weight:700}
 .v p{margin:4px 0 0;color:#C9D8F6;font-size:15px}
 .steps{display:grid;gap:20px}
 @media(min-width:700px){.steps{grid-template-columns:repeat(3,1fr)}}
-.steps h3{font-size:19px;margin-bottom:6px}.steps p{margin:0;color:var(--muted)}
+.steps h3{font-size:19px;margin-bottom:6px}.steps p{margin:0;color:var(--muted)}.step-card{padding:22px 20px 20px;border:1px solid var(--line);border-radius:16px;background:var(--card);box-shadow:0 8px 24px rgba(7,26,58,.06);transition:transform .2s,box-shadow .2s}
+.step-card:hover{transform:translateY(-4px);box-shadow:0 14px 30px rgba(7,26,58,.11)}
+.step-icon{width:58px;height:58px;display:grid;place-items:center;border-radius:16px;margin-bottom:16px;background:rgba(31,107,255,.1);color:var(--blue)}
+.step-icon svg{width:34px;height:34px}
+.pay-icon{background:rgba(25,211,243,.13);color:#079AB5}
+.receive-icon{background:rgba(31,107,255,.12);color:var(--blue)}
+@media(prefers-reduced-motion:reduce){.step-card{transition:none}.step-card:hover{transform:none}}
+
 footer{margin-top:64px;background:var(--navy);color:#C9D8F6;padding:36px 20px calc(36px + env(safe-area-inset-bottom,0px))}
 footer div{max-width:1100px;margin:auto;display:flex;flex-wrap:wrap;gap:12px 32px;justify-content:space-between;align-items:center}
 footer strong{color:#fff;font-family:Sora,system-ui,sans-serif}
@@ -105,7 +120,13 @@ footer strong{color:#fff;font-family:Sora,system-ui,sans-serif}
 
 <main>
 <section id="bundles"><h2>Data bundles</h2><p class="lead">Choose your network to see our starting price, then explore every offer in our store.</p>
-<div class="tabs" role="tablist" id="tabs"></div><div class="offer" id="grid"></div></section>
+<div class="network-showcase">
+<div class="tabs" role="tablist" id="tabs" aria-label="Choose a mobile network"></div>
+<div class="network-photo">
+<img src="https://images.unsplash.com/photo-1758876203026-99a024dc43b9?auto=format&fit=crop&fm=jpg&ixlib=rb-4.1.0&q=85&w=1400" alt="Colleagues smiling and collaborating around a laptop in a modern workplace">
+<div class="photo-wash" aria-hidden="true"></div>
+</div>
+</div><div class="offer" id="grid"></div></section>
 
 <section id="vouchers"><h2>Results checker vouchers</h2><p class="lead">Official voucher for checking exam results online.</p>
 <div class="vouch">
@@ -115,7 +136,11 @@ footer strong{color:#fff;font-family:Sora,system-ui,sans-serif}
 <section id="afa"><h2>AFA registration</h2><p class="lead">Register your MTN number for AFA and enjoy bundle benefits.</p><div class="v"><div><h3>MTN AFA</h3><p>Registration fee<br><b>GHS 25.00</b></p></div><a class="btn" href="#" data-store>Register</a></div></section>
 
 <section id="how"><h2>How it works</h2><p class="lead">Three steps, all from your phone.</p>
-<div class="steps"><div><h3>Choose</h3><p>Select your network and bundle size.</p></div><div><h3>Pay</h3><p>Complete payment in our secure store.</p></div><div><h3>Receive</h3><p>Your data or voucher is sent to the number you entered.</p></div></div></section>
+<div class="steps">
+<div class="step-card"><div class="step-icon choose-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="17" fill="none" stroke="currentColor" stroke-width="3"/><path d="m15 24 6 6 12-13" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h3>Choose</h3><p>Select your network and bundle size.</p></div>
+<div class="step-card"><div class="step-icon pay-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><rect x="7" y="11" width="34" height="26" rx="5" fill="none" stroke="currentColor" stroke-width="3"/><path d="M7 19h34M14 29h9" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg></div><h3>Pay</h3><p>Complete payment in our secure store.</p></div>
+<div class="step-card"><div class="step-icon receive-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><rect x="14" y="5" width="20" height="38" rx="4" fill="none" stroke="currentColor" stroke-width="3"/><path d="M20 11h8M21 36h6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><path d="m19 24 4 4 7-8" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h3>Receive</h3><p>Your data or voucher is sent to the number you entered.</p></div>
+</div></section>
 </main>
 
 <footer><div><img src="logo.png" alt="DATAL GHANA – Connected Everywhere" width="140" height="67" style="height:67px;width:auto"><a class="btn alt" id="wa" href="#" hidden>Chat on WhatsApp</a><a class="btn alt" href="mailto:datalghana@gmail.com">Email us</a></div></footer>
