@@ -58,12 +58,21 @@ h2{font-size:clamp(26px,5vw,36px);font-weight:700}
 .tabs button[aria-selected="true"]{box-shadow:0 0 0 3px var(--bg),0 0 0 5px var(--ink);transform:translateY(-2px)}
 /* network selector showcase */
 .network-showcase{position:relative;display:grid;grid-template-columns:1fr;grid-template-rows:1fr;align-items:stretch;background:var(--navy);border-radius:20px;overflow:hidden;margin:0 0 18px;min-height:340px}
-.network-showcase .tabs{grid-area:1/1;z-index:2;align-self:center;justify-self:start;display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:12px;overflow:visible;width:max-content;max-width:calc(100% - 48px);margin:24px;padding:18px;background:rgba(7,26,58,.78);border:1px solid rgba(255,255,255,.18);border-radius:18px;backdrop-filter:blur(8px);box-shadow:0 12px 32px rgba(0,0,0,.18)}
+.network-showcase .tabs{grid-area:1/1;z-index:3;align-self:center;justify-self:start;display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:12px;overflow:visible;width:max-content;max-width:calc(100% - 48px);margin:24px;padding:18px;background:rgba(7,26,58,.78);border:1px solid rgba(255,255,255,.18);border-radius:18px;backdrop-filter:blur(8px);box-shadow:0 12px 32px rgba(0,0,0,.18)}
 .network-showcase .tabs button{min-width:112px}
 .network-photo{grid-area:1/1;position:relative;min-height:340px;overflow:hidden;background:var(--navy)}
+.network-photo .network-slide{position:absolute;inset:0;opacity:0;transition:opacity .8s ease}
+.network-photo .network-slide.is-active{opacity:1}
 .network-photo img{display:block;width:100%;height:100%;min-height:340px;object-fit:cover;object-position:center 45%;opacity:.94}
 .photo-wash{position:absolute;inset:0;background:linear-gradient(90deg,rgba(7,26,58,.88) 0%,rgba(7,26,58,.52) 34%,rgba(7,26,58,.12) 72%,rgba(7,26,58,.08) 100%);pointer-events:none}
-@media(max-width:699px){.network-showcase{min-height:300px}.network-showcase .tabs{align-self:end;justify-self:center;max-width:calc(100% - 28px);width:calc(100% - 28px);margin:14px;padding:12px;gap:8px}.network-showcase .tabs button{min-width:0;flex:1 1 auto;padding:10px 12px}.network-photo,.network-photo img{min-height:300px}.network-photo img{object-position:58% center}.photo-wash{background:linear-gradient(180deg,rgba(7,26,58,.05) 0%,rgba(7,26,58,.12) 42%,rgba(7,26,58,.88) 100%)}}
+.carousel-toggle{position:absolute;z-index:4;right:20px;bottom:20px;width:54px;height:54px;padding:0;border:1px solid rgba(255,255,255,.45);border-radius:50%;display:grid;place-items:center;background:rgba(7,26,58,.76);color:#fff;cursor:pointer;backdrop-filter:blur(8px);box-shadow:0 8px 24px rgba(0,0,0,.25)}
+.carousel-toggle svg{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg)}
+.carousel-toggle .progress-track{fill:none;stroke:rgba(255,255,255,.28);stroke-width:2.5}
+.carousel-toggle .progress-value{fill:none;stroke:var(--cyan);stroke-width:2.5;stroke-linecap:round;stroke-dasharray:150.8;stroke-dashoffset:150.8;transition:stroke-dashoffset .08s linear}
+.carousel-toggle .toggle-symbol{position:relative;width:19px;height:19px;fill:currentColor}
+.carousel-toggle:focus-visible{outline:3px solid var(--cyan);outline-offset:4px}
+@media(max-width:699px){.network-showcase{min-height:300px}.network-showcase .tabs{align-self:end;justify-self:center;max-width:calc(100% - 28px);width:calc(100% - 28px);margin:14px;padding:12px;gap:8px}.network-showcase .tabs button{min-width:0;flex:1 1 auto;padding:10px 12px}.network-photo,.network-photo img{min-height:300px}.network-photo img{object-position:58% center}.photo-wash{background:linear-gradient(180deg,rgba(7,26,58,.05) 0%,rgba(7,26,58,.12) 42%,rgba(7,26,58,.88) 100%)}.carousel-toggle{right:14px;bottom:14px;width:48px;height:48px}}
+@media(prefers-reduced-motion:reduce){.network-photo .network-slide{transition:none}}
 .offer{display:grid;gap:16px;align-items:center}
 @media(min-width:700px){.offer{grid-template-columns:260px 1fr;gap:28px}}
 .tile{display:flex;flex-direction:column;gap:6px;padding:22px;border:2px solid var(--brand,var(--blue));border-radius:16px;background:var(--card)}
@@ -120,9 +129,14 @@ footer strong{color:#fff;font-family:Sora,system-ui,sans-serif}
 <section id="bundles"><h2>Data bundles</h2><p class="lead">Choose your network to see our starting price, then explore every offer in our store.</p>
 <div class="network-showcase">
 <div class="tabs" role="tablist" id="tabs" aria-label="Choose a mobile network"></div>
-<div class="network-photo">
-<img src="https://images.pexels.com/photos/5749153/pexels-photo-5749153.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Black professional working on a laptop while talking on a smartphone in a bright office">
+<div class="network-photo" id="networkCarousel" aria-label="Workplace connectivity photographs">
+<div class="network-slide is-active" aria-hidden="false"><img src="https://images.pexels.com/photos/5749153/pexels-photo-5749153.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Black professional working on a laptop while talking on a smartphone in a bright office" fetchpriority="high"></div>
+<div class="network-slide" aria-hidden="true"><img src="https://images.pexels.com/photos/4559596/pexels-photo-4559596.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Smiling Black professional using a laptop and smartphone while working remotely"></div>
 <div class="photo-wash" aria-hidden="true"></div>
+<button class="carousel-toggle" id="carouselToggle" type="button" aria-label="Pause image carousel" aria-pressed="false">
+<svg viewBox="0 0 54 54" aria-hidden="true"><circle class="progress-track" cx="27" cy="27" r="24"/><circle class="progress-value" id="carouselProgress" cx="27" cy="27" r="24"/></svg>
+<svg class="toggle-symbol" id="carouselSymbol" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="4" width="5" height="16" rx="1"/><rect x="14" y="4" width="5" height="16" rx="1"/></svg>
+</button>
 </div>
 </div><div class="offer" id="grid"></div></section>
 
@@ -165,7 +179,39 @@ function show(o){
 OFFERS.forEach((o,n)=>{const b=document.createElement("button");b.role="tab";b.textContent=o.name;b.dataset.id=o.id;b.onclick=()=>show(o);tabs.append(b)});
 show(OFFERS[0]);
 
-// carousel
+// Two-image workplace carousel: circular progress doubles as the pause/play control.
+const networkCarousel=document.getElementById("networkCarousel");
+if(networkCarousel){
+ const frames=[...networkCarousel.querySelectorAll(".network-slide")];
+ const toggle=document.getElementById("carouselToggle");
+ const progress=document.getElementById("carouselProgress");
+ const symbol=document.getElementById("carouselSymbol");
+ const duration=6500,circumference=150.8;
+ let active=0,elapsed=0,lastTick=0,paused=false,raf=0;
+ progress.style.strokeDasharray=String(circumference);
+ function drawProgress(){progress.style.strokeDashoffset=String(circumference*(1-Math.min(elapsed/duration,1)))}
+ function showFrame(next){active=next;frames.forEach((frame,index)=>{const visible=index===active;frame.classList.toggle("is-active",visible);frame.setAttribute("aria-hidden",String(!visible))})}
+ function setPaused(value){
+  paused=value;toggle.setAttribute("aria-pressed",String(paused));
+  toggle.setAttribute("aria-label",paused?"Play image carousel":"Pause image carousel");
+  symbol.innerHTML=paused?'<path d="M7 4.5v15l12-7.5z"/>':'<rect x="5" y="4" width="5" height="16" rx="1"/><rect x="14" y="4" width="5" height="16" rx="1"/>';
+  lastTick=0;
+  if(!paused&&!raf)raf=requestAnimationFrame(tick);
+ }
+ function tick(now){
+  raf=0;if(paused)return;
+  if(!lastTick)lastTick=now;
+  elapsed+=now-lastTick;lastTick=now;
+  if(elapsed>=duration){elapsed=0;showFrame((active+1)%frames.length)}
+  drawProgress();raf=requestAnimationFrame(tick);
+ }
+ toggle.addEventListener("click",()=>{if(paused)setPaused(false);else setPaused(true)});
+ if(!window.matchMedia("(prefers-reduced-motion: reduce)").matches){setPaused(false)}
+ else{setPaused(true)}
+ document.addEventListener("visibilitychange",()=>{lastTick=0});
+}
+
+ // carousel
 const track=document.getElementById("track"),slides=[...track.children],dots=document.getElementById("dots"),hero=document.getElementById("top");
 let i=0,timer;
 slides.forEach((_,n)=>{const b=document.createElement("button");b.setAttribute("aria-label","Go to slide "+(n+1));b.onclick=()=>{go(n);play()};dots.append(b)});
