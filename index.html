@@ -86,10 +86,8 @@ h2{font-size:clamp(26px,5vw,36px);font-weight:700}
 @media(min-width:700px){.steps{grid-template-columns:repeat(3,1fr)}}
 .steps h3{font-size:19px;margin-bottom:6px}.steps p{margin:0;color:var(--muted)}.step-card{padding:22px 20px 20px;border:1px solid var(--line);border-radius:16px;background:var(--card);box-shadow:0 8px 24px rgba(7,26,58,.06);transition:transform .2s,box-shadow .2s}
 .step-card:hover{transform:translateY(-4px);box-shadow:0 14px 30px rgba(7,26,58,.11)}
-.step-icon{width:58px;height:58px;display:grid;place-items:center;border-radius:16px;margin-bottom:16px;background:rgba(31,107,255,.1);color:var(--blue)}
+.step-icon{width:58px;height:58px;display:grid;place-items:center;border-radius:16px;margin-bottom:16px;background:rgba(25,211,243,.13);color:#079AB5}
 .step-icon svg{width:34px;height:34px}
-.pay-icon{background:rgba(25,211,243,.13);color:#079AB5}
-.receive-icon{background:rgba(31,107,255,.12);color:var(--blue)}
 @media(prefers-reduced-motion:reduce){.step-card{transition:none}.step-card:hover{transform:none}}
 
 footer{margin-top:64px;background:var(--navy);color:#C9D8F6;padding:36px 20px calc(36px + env(safe-area-inset-bottom,0px))}
@@ -137,9 +135,9 @@ footer strong{color:#fff;font-family:Sora,system-ui,sans-serif}
 
 <section id="how"><h2>How it works</h2><p class="lead">Three steps, all from your phone.</p>
 <div class="steps">
-<div class="step-card"><div class="step-icon choose-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="17" fill="none" stroke="currentColor" stroke-width="3"/><path d="m15 24 6 6 12-13" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h3>Choose</h3><p>Select your network and bundle size.</p></div>
+<div class="step-card"><div class="step-icon choose-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M8 12h23M8 21h23M8 30h16" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><path d="M29 25v15l4.2-4.2 3.2 6.2 3.1-1.6-3.2-6.1L42 33z" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg></div><h3>Choose</h3><p>Select your network and bundle size.</p></div>
 <div class="step-card"><div class="step-icon pay-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><rect x="7" y="11" width="34" height="26" rx="5" fill="none" stroke="currentColor" stroke-width="3"/><path d="M7 19h34M14 29h9" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg></div><h3>Pay</h3><p>Complete payment in our secure store.</p></div>
-<div class="step-card"><div class="step-icon receive-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><rect x="14" y="5" width="20" height="38" rx="4" fill="none" stroke="currentColor" stroke-width="3"/><path d="M20 11h8M21 36h6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><path d="m19 24 4 4 7-8" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h3>Receive</h3><p>Your data or voucher is sent to the number you entered.</p></div>
+<div class="step-card"><div class="step-icon receive-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="17" fill="none" stroke="currentColor" stroke-width="3"/><path d="m15 24 6 6 12-13" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h3>Receive</h3><p>Your data or voucher is sent to the number you entered.</p></div>
 </div></section>
 </main>
 
