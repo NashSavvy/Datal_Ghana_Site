@@ -57,29 +57,44 @@ h2{font-size:clamp(26px,5vw,36px);font-weight:700}
 .tabs button[data-id="ishare"]{background:linear-gradient(90deg,#E4002B,#1F4FD8);border-color:transparent;color:#fff}
 .tabs button[aria-selected="true"]{box-shadow:0 0 0 3px var(--bg),0 0 0 5px var(--ink);transform:translateY(-2px)}
 /* network selector showcase */
-.network-showcase{position:relative;display:grid;grid-template-columns:1fr;grid-template-rows:1fr;align-items:stretch;background:var(--navy);border-radius:20px;overflow:hidden;margin:0 0 18px;min-height:450px}
-.network-content{grid-area:1/1;z-index:3;align-self:center;justify-self:start;display:flex;flex-direction:column;gap:18px;width:min(620px,calc(100% - 104px));margin:30px}
-.network-showcase .tabs{display:flex;align-items:center;justify-content:flex-start;flex-wrap:wrap;gap:12px;overflow:visible;width:max-content;max-width:100%;margin:0;padding:14px 16px;background:rgba(3,14,34,.91);border:1px solid rgba(255,255,255,.2);border-radius:16px;backdrop-filter:blur(10px);box-shadow:0 12px 32px rgba(0,0,0,.25)}
+.network-showcase{position:relative;display:grid;grid-template-columns:1fr;grid-template-rows:1fr;align-items:stretch;background:var(--navy);border-radius:20px;overflow:hidden;margin:0 0 18px;min-height:560px}
+.network-content{grid-area:1/1;z-index:3;align-self:start;justify-self:start;display:flex;flex-direction:column;align-items:stretch;gap:16px;width:min(520px,calc(100% - 120px));margin:30px 34px}
+.network-showcase .tabs{display:flex;align-items:center;justify-content:flex-start;flex-wrap:wrap;gap:10px;overflow:visible;width:max-content;max-width:100%;margin:0;padding:12px 14px;background:rgba(3,14,34,.96);border:1px solid rgba(255,255,255,.24);border-radius:15px;backdrop-filter:blur(10px);box-shadow:0 12px 32px rgba(0,0,0,.3)}
 .network-showcase .tabs button{min-width:112px}
-.network-photo{grid-area:1/1;position:relative;min-height:450px;overflow:hidden;background:var(--navy)}
+.network-photo{grid-area:1/1;position:relative;min-height:560px;overflow:hidden;background:var(--navy)}
 .network-photo .network-slide{position:absolute;inset:0;opacity:0;transition:opacity .8s ease}
 .network-photo .network-slide.is-active{opacity:1}
-.network-photo img{display:block;width:100%;height:100%;min-height:450px;object-fit:cover;object-position:center 45%;opacity:.94}
-.photo-wash{position:absolute;inset:0;background:linear-gradient(90deg,rgba(3,14,34,.94) 0%,rgba(3,14,34,.83) 36%,rgba(3,14,34,.48) 68%,rgba(3,14,34,.28) 100%);pointer-events:none}
-.network-content .offer{display:grid;gap:14px;align-items:stretch;width:100%;padding:0}
-.network-content .tile{background:rgba(3,14,34,.91);border-color:var(--brand,var(--blue));color:#f4f7ff;box-shadow:0 10px 26px rgba(0,0,0,.2)}
-.network-content .tile span{color:#d6e3ff}
-.network-content .more p{margin:0 0 14px;color:#f0f5ff;max-width:44ch;text-shadow:0 1px 8px rgba(0,0,0,.4)}
+.network-photo img{display:block;width:100%;height:100%;min-height:560px;object-fit:cover;object-position:center 45%;opacity:.94}
+.photo-wash{position:absolute;inset:0;background:linear-gradient(90deg,rgba(3,14,34,.97) 0%,rgba(3,14,34,.91) 40%,rgba(3,14,34,.69) 76%,rgba(3,14,34,.5) 100%);pointer-events:none}
+.network-content .offer{display:flex;flex-direction:column;align-items:stretch;gap:14px;width:100%;padding:0;margin:0}
+.network-content .tile{display:flex;flex-direction:column;gap:7px;justify-content:center;width:100%;min-height:118px;padding:18px 22px;background:rgba(3,14,34,.96);border:2px solid var(--brand,var(--blue));border-radius:16px;color:#f4f7ff;box-shadow:0 10px 26px rgba(0,0,0,.28)}
+.network-content .tile b{font:800 44px/1 Sora,system-ui,sans-serif}
+.network-content .tile span{color:#e7efff}
+.network-content .more{display:flex;flex-direction:column;align-items:flex-start;gap:13px;padding:2px 3px}
+.network-content .more p{margin:0;color:#fff;max-width:48ch;line-height:1.55;text-shadow:0 1px 10px rgba(0,0,0,.8)}
 .network-content .big{color:var(--cyan)}
-.carousel-toggle{position:absolute;z-index:4;right:20px;bottom:20px;width:54px;height:54px;padding:0;border:1px solid rgba(255,255,255,.45);border-radius:50%;display:grid;place-items:center;background:rgba(3,14,34,.9);color:#fff;cursor:pointer;backdrop-filter:blur(8px);box-shadow:0 8px 24px rgba(0,0,0,.3)}
+.carousel-toggle{position:absolute;z-index:4;right:20px;bottom:20px;width:54px;height:54px;padding:0;border:1px solid rgba(255,255,255,.5);border-radius:50%;display:grid;place-items:center;background:rgba(3,14,34,.96);color:#fff;cursor:pointer;backdrop-filter:blur(8px);box-shadow:0 8px 24px rgba(0,0,0,.35)}
 .carousel-toggle svg{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg)}
-.carousel-toggle .progress-track{fill:none;stroke:rgba(255,255,255,.28);stroke-width:2.5}
+.carousel-toggle .progress-track{fill:none;stroke:rgba(255,255,255,.3);stroke-width:2.5}
 .carousel-toggle .progress-value{fill:none;stroke:var(--cyan);stroke-width:2.5;stroke-linecap:round;stroke-dasharray:150.8;stroke-dashoffset:150.8;transition:stroke-dashoffset .08s linear}
 .carousel-toggle .toggle-symbol{position:relative;width:19px;height:19px;fill:currentColor}
 .carousel-toggle:focus-visible{outline:3px solid var(--cyan);outline-offset:4px}
-@media(min-width:700px){.network-content .offer{grid-template-columns:minmax(190px,.8fr) minmax(0,1.2fr);gap:18px}.network-content .tile{min-height:132px;justify-content:center}}
-@media(max-width:699px){.network-showcase{min-height:510px}.network-content{align-self:center;justify-self:center;width:calc(100% - 28px);margin:14px;gap:14px;padding-bottom:34px}.network-showcase .tabs{width:100%;max-width:100%;justify-content:center;padding:12px;gap:8px}.network-showcase .tabs button{min-width:0;flex:1 1 auto;padding:10px 12px}.network-photo,.network-photo img{min-height:510px}.network-photo img{object-position:58% center}.photo-wash{background:linear-gradient(180deg,rgba(3,14,34,.48) 0%,rgba(3,14,34,.66) 34%,rgba(3,14,34,.9) 100%)}.network-content .offer{grid-template-columns:1fr;gap:12px}.network-content .tile{padding:16px}.network-content .tile b{font-size:38px}.network-content .more p{margin-bottom:10px}.carousel-toggle{right:14px;bottom:12px;width:46px;height:46px}}
+@media(max-width:699px){.network-showcase{min-height:600px}.network-content{align-self:start;justify-self:center;width:calc(100% - 32px);margin:22px 16px;gap:14px;padding-bottom:48px}.network-showcase .tabs{width:100%;max-width:100%;justify-content:center;gap:7px;padding:10px}.network-showcase .tabs button{min-width:0;flex:1 1 0;padding:10px 9px;font-size:14px}.network-photo,.network-photo img{min-height:600px}.network-photo img{object-position:58% center}.photo-wash{background:linear-gradient(180deg,rgba(3,14,34,.82) 0%,rgba(3,14,34,.88) 44%,rgba(3,14,34,.97) 100%)}.network-content .offer{gap:13px}.network-content .tile{min-height:104px;padding:16px}.network-content .tile b{font-size:38px}.network-content .more{gap:11px}.carousel-toggle{right:14px;bottom:12px;width:46px;height:46px}}
 @media(prefers-reduced-motion:reduce){.network-photo .network-slide{transition:none}}
+/* Bright rectangular service illustrations */
+.v.service-card{position:relative;isolation:isolate;min-height:154px;overflow:hidden;padding:22px 22px;border:1px solid rgba(31,107,255,.16);border-radius:18px;color:#092149;background:linear-gradient(112deg,#ecfbff 0%,#d9f1ff 55%,#d6e7ff 100%);box-shadow:0 12px 28px rgba(7,26,58,.09)}
+.service-copy{position:relative;z-index:2;max-width:48%}
+.service-copy h3{color:#092149}
+.service-copy p{margin:4px 0 0;color:#29486f;font-size:15px}
+.v.service-card .service-copy p{color:#29486f}
+.service-copy p b{color:#071A3A}
+.service-art{position:absolute;z-index:1;right:82px;top:50%;width:190px;height:122px;transform:translateY(-50%);overflow:hidden;border-radius:15px;pointer-events:none;opacity:.96;box-shadow:0 8px 20px rgba(10,55,105,.1)}
+.service-art svg{display:block;width:100%;height:100%}
+.v.service-card>.btn{position:relative;z-index:3;flex:0 0 auto;white-space:nowrap}
+.v.service-card.afa-card{background:linear-gradient(112deg,#e8fff8 0%,#d8f8f0 54%,#d5edff 100%);border-color:rgba(0,155,139,.18)}
+.v.service-card.afa-card .service-art{right:96px}
+@media(max-width:699px){.v.service-card{min-height:142px;padding:17px 14px;gap:8px}.service-copy{max-width:50%}.service-copy h3{font-size:17px}.service-copy p{font-size:13px;line-height:1.4}.service-art{right:62px;width:116px;height:92px;opacity:.72;border-radius:12px}.v.service-card.afa-card .service-art{right:64px;width:118px}.v.service-card>.btn{padding:10px 12px;font-size:13px}}
+
 .offer{display:grid;gap:16px;align-items:center}
 @media(min-width:700px){.offer{grid-template-columns:260px 1fr;gap:28px}}
 .tile{display:flex;flex-direction:column;gap:6px;padding:22px;border:2px solid var(--brand,var(--blue));border-radius:16px;background:var(--card)}
@@ -152,10 +167,10 @@ footer strong{color:#fff;font-family:Sora,system-ui,sans-serif}
 
 <section id="vouchers"><h2>Results checker vouchers</h2><p class="lead">Official voucher for checking exam results online.</p>
 <div class="vouch">
-<div class="v"><div><h3>BECE</h3><p>Check BECE results<br><b>GHS 27.00</b></p></div><a class="btn" href="#" data-store>Buy</a></div>
-<div class="v"><div><h3>WASSCE</h3><p>Check SHS WAEC results<br><b>GHS 27.00</b></p></div><a class="btn" href="#" data-store>Buy</a></div></div></section>
+<div class="v service-card voucher-card"><div class="service-copy"><h3>BECE</h3><p>Check BECE results<br><b>GHS 27.00</b></p></div><div class="service-art" aria-hidden="true"><svg viewBox="0 0 240 150" xmlns="http://www.w3.org/2000/svg"><rect width="240" height="150" rx="16" fill="#C8F0FF"/><circle cx="195" cy="27" r="22" fill="#8CE6DC"/><rect x="82" y="20" width="93" height="112" rx="10" fill="#fff" stroke="#78C5E8" stroke-width="3"/><path d="M99 43h57M99 57h45M99 71h35" stroke="#7BA9CF" stroke-width="5" stroke-linecap="round"/><path d="M99 88h48M99 101h33" stroke="#B3D5E8" stroke-width="4" stroke-linecap="round"/><circle cx="155" cy="107" r="18" fill="#19B99A"/><path d="m146 107 6 6 12-14" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="m45 48 23-11 23 11-23 11z" fill="#1F6BFF"/><path d="M55 54v12c8 7 18 7 26 0V54" fill="#4D8DFF"/><path d="M89 48v16" stroke="#1F6BFF" stroke-width="3" stroke-linecap="round"/></svg></div><a class="btn" href="#" data-store>Buy</a></div>
+<div class="v service-card voucher-card"><div class="service-copy"><h3>WASSCE</h3><p>Check SHS WAEC results<br><b>GHS 27.00</b></p></div><div class="service-art" aria-hidden="true"><svg viewBox="0 0 240 150" xmlns="http://www.w3.org/2000/svg"><rect width="240" height="150" rx="16" fill="#D8E8FF"/><circle cx="193" cy="35" r="24" fill="#B8D4FF"/><rect x="75" y="18" width="96" height="116" rx="10" fill="#fff" stroke="#8CB5EE" stroke-width="3"/><path d="M94 43h57M94 58h47M94 73h51" stroke="#83A9D8" stroke-width="5" stroke-linecap="round"/><path d="M94 91h43" stroke="#B4C9E4" stroke-width="4" stroke-linecap="round"/><circle cx="151" cy="105" r="18" fill="#1F6BFF"/><path d="m142 105 6 6 12-14" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="m43 48 23-11 23 11-23 11z" fill="#19B99A"/><path d="M53 54v12c8 7 18 7 26 0V54" fill="#6BD8C2"/></svg></div><a class="btn" href="#" data-store>Buy</a></div></div></section>
 
-<section id="afa"><h2>AFA registration</h2><p class="lead">Register your MTN number for AFA and enjoy bundle benefits.</p><div class="v"><div><h3>MTN AFA</h3><p>Registration fee<br><b>GHS 25.00</b></p></div><a class="btn" href="#" data-store>Register</a></div></section>
+<section id="afa"><h2>AFA registration</h2><p class="lead">Register your MTN number for AFA and enjoy bundle benefits.</p><div class="v service-card afa-card"><div class="service-copy"><h3>MTN AFA</h3><p>Registration fee<br><b>GHS 25.00</b></p></div><div class="service-art" aria-hidden="true"><svg viewBox="0 0 240 150" xmlns="http://www.w3.org/2000/svg"><rect width="240" height="150" rx="16" fill="#C9F5EC"/><circle cx="190" cy="31" r="23" fill="#8EE3D3"/><rect x="84" y="12" width="69" height="126" rx="13" fill="#fff" stroke="#62BFB0" stroke-width="4"/><rect x="93" y="29" width="51" height="77" rx="6" fill="#EAFBFF"/><path d="M105 44h27M105 57h20" stroke="#79B7D6" stroke-width="4" stroke-linecap="round"/><path d="M111 73h14v20h-14z" fill="#FFD166" stroke="#E5A93C" stroke-width="2"/><circle cx="119" cy="120" r="4" fill="#67C6B3"/><circle cx="168" cy="91" r="25" fill="#1F6BFF"/><path d="m156 91 8 8 17-19" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><path d="M42 50c9-9 23-9 32 0M35 39c13-14 34-14 47 0" fill="none" stroke="#079AB5" stroke-width="5" stroke-linecap="round"/></svg></div><a class="btn" href="#" data-store>Register</a></div></section>
 
 <section id="how"><h2>How it works</h2><p class="lead">Three steps, all from your phone.</p>
 <div class="steps">
