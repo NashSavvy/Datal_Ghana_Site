@@ -16,7 +16,8 @@
 :root{--navy:#071A3A;--blue:#1F6BFF;--cyan:#19D3F3;--bg:#F5F8FF;--ink:#0B1B3A;--muted:#4B5D80;--card:#fff;--line:#D9E2F5;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#050F24;--ink:#EAF1FF;--muted:#9FB3DA;--card:#0B1B3A;--line:#1B2E57;color-scheme:dark}}
 :root[data-theme="dark"]{--bg:#050F24;--ink:#EAF1FF;--muted:#9FB3DA;--card:#0B1B3A;--line:#1B2E57;color-scheme:dark}
-html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 80px)}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 100px);scroll-behavior:smooth}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 *,*::before,*::after{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--navy);z-index:10}
@@ -24,10 +25,16 @@ h1,h2,h3,.logo{font-family:Sora,system-ui,sans-serif;margin:0}
 a{color:inherit}
 :focus-visible{outline:3px solid var(--cyan);outline-offset:2px}
 header{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--navy);color:#fff}
-.bar{max-width:1100px;margin:auto;display:flex;align-items:center;justify-content:space-between;padding:12px 20px}
-.logo{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.04em;text-decoration:none}
+.bar{max-width:1100px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:12px 20px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.04em;text-decoration:none;flex:0 0 auto}
 .logo small{font-weight:500;opacity:.75;letter-spacing:.04em}
 .logo img{display:block;height:44px;width:auto}
+.header-links{display:flex;align-items:center;justify-content:flex-end;gap:clamp(14px,2vw,24px);min-width:0;flex:1}
+.site-nav{display:flex;align-items:center;justify-content:flex-end;gap:clamp(12px,1.8vw,22px);min-width:0}
+.site-nav a{color:#dce8ff;text-decoration:none;font-size:14px;font-weight:700;white-space:nowrap;transition:color .2s ease}
+.site-nav a:hover,.site-nav a:focus-visible{color:var(--cyan)}
+.header-buy{flex:0 0 auto;padding:10px 17px;background:var(--cyan);color:#05213d;box-shadow:0 4px 14px rgba(25,211,243,.16);transition:background .2s ease,transform .2s ease,box-shadow .2s ease}
+.header-buy:hover{background:#fff;color:var(--navy);transform:translateY(-2px);box-shadow:0 7px 18px rgba(25,211,243,.24)}
 .btn{display:inline-block;background:var(--blue);color:#fff;text-decoration:none;font-weight:700;padding:11px 20px;border-radius:999px;border:0;cursor:pointer;font-size:15px}
 .btn.alt{background:transparent;border:2px solid #fff}
 .btn:hover{filter:brightness(1.1)}
@@ -57,43 +64,85 @@ h2{font-size:clamp(26px,5vw,36px);font-weight:700}
 .tabs button[data-id="ishare"]{background:linear-gradient(90deg,#E4002B,#1F4FD8);border-color:transparent;color:#fff}
 .tabs button[aria-selected="true"]{box-shadow:0 0 0 3px var(--bg),0 0 0 5px var(--ink);transform:translateY(-2px)}
 /* network selector showcase */
-.network-showcase{position:relative;display:grid;grid-template-columns:1fr;grid-template-rows:1fr;align-items:stretch;background:var(--navy);border-radius:20px;overflow:hidden;margin:0 0 18px;min-height:560px}
-.network-content{grid-area:1/1;z-index:3;align-self:start;justify-self:start;display:flex;flex-direction:column;align-items:stretch;gap:16px;width:min(520px,calc(100% - 120px));margin:30px 34px}
-.network-showcase .tabs{display:flex;align-items:center;justify-content:flex-start;flex-wrap:wrap;gap:10px;overflow:visible;width:max-content;max-width:100%;margin:0;padding:12px 14px;background:rgba(3,14,34,.96);border:1px solid rgba(255,255,255,.24);border-radius:15px;backdrop-filter:blur(10px);box-shadow:0 12px 32px rgba(0,0,0,.3)}
-.network-showcase .tabs button{min-width:112px}
-.network-photo{grid-area:1/1;position:relative;min-height:560px;overflow:hidden;background:var(--navy)}
+.network-showcase{position:relative;display:block;background:var(--navy);border-radius:20px;overflow:hidden;margin:0 0 18px;min-height:0}
+.network-content{position:relative;z-index:3;display:flex;flex-direction:column;align-items:flex-start;gap:12px;width:min(440px,100%);margin:0;padding:24px 28px 26px}
+.network-showcase .tabs{display:flex;align-items:center;justify-content:flex-start;flex-wrap:wrap;gap:10px;overflow:visible;width:max-content;max-width:100%;margin:0;padding:11px 13px;background:rgba(3,14,34,.58);border:1px solid rgba(255,255,255,.24);border-radius:14px;backdrop-filter:blur(12px);box-shadow:0 8px 22px rgba(0,0,0,.16)}
+.network-showcase .tabs button{min-width:104px}
+.network-photo{position:absolute;z-index:0;inset:0;overflow:hidden;background:var(--navy)}
 .network-photo .network-slide{position:absolute;inset:0;opacity:0;transition:opacity .8s ease}
 .network-photo .network-slide.is-active{opacity:1}
-.network-photo img{display:block;width:100%;height:100%;min-height:560px;object-fit:cover;object-position:center 45%;opacity:.94}
-.photo-wash{position:absolute;inset:0;background:linear-gradient(90deg,rgba(3,14,34,.97) 0%,rgba(3,14,34,.91) 40%,rgba(3,14,34,.69) 76%,rgba(3,14,34,.5) 100%);pointer-events:none}
-.network-content .offer{display:flex;flex-direction:column;align-items:stretch;gap:14px;width:100%;padding:0;margin:0}
-.network-content .tile{display:flex;flex-direction:column;gap:7px;justify-content:center;width:100%;min-height:118px;padding:18px 22px;background:rgba(3,14,34,.96);border:2px solid var(--brand,var(--blue));border-radius:16px;color:#f4f7ff;box-shadow:0 10px 26px rgba(0,0,0,.28)}
-.network-content .tile b{font:800 44px/1 Sora,system-ui,sans-serif}
+.network-photo img{display:block;width:100%;height:100%;object-fit:cover;object-position:65% center;transform:scale(1.08);opacity:1;filter:saturate(1.04)}
+.photo-wash{position:absolute;inset:0;background:linear-gradient(90deg,rgba(3,14,34,.60) 0%,rgba(3,14,34,.48) 25%,rgba(3,14,34,.31) 42%,rgba(3,14,34,.14) 56%,rgba(3,14,34,0) 72%),linear-gradient(0deg,rgba(3,14,34,.08),rgba(3,14,34,.02));pointer-events:none}
+.network-content .offer{display:flex;flex-direction:column;align-items:stretch;gap:12px;width:100%;padding:0;margin:0}
+.network-content .tile{display:flex;flex-direction:column;gap:6px;justify-content:center;align-self:flex-start;width:min(328px,100%);min-height:104px;padding:15px 20px;background:rgba(3,14,34,.62);border:2px solid var(--brand,var(--blue));border-radius:15px;color:#f4f7ff;backdrop-filter:blur(12px);box-shadow:0 8px 20px rgba(0,0,0,.16)}
+.network-content .tile b{font:800 42px/1 Sora,system-ui,sans-serif}
 .network-content .tile span{color:#e7efff}
-.network-content .more{display:flex;flex-direction:column;align-items:flex-start;gap:13px;padding:2px 3px}
-.network-content .more p{margin:0;color:#fff;max-width:48ch;line-height:1.55;text-shadow:0 1px 10px rgba(0,0,0,.8)}
+.network-content .more{display:flex;flex-direction:column;align-items:flex-start;gap:11px;width:100%;padding:1px 2px}
+.network-content .more p{margin:0;color:#fff;max-width:46ch;line-height:1.5;text-shadow:0 1px 8px rgba(0,0,0,.75)}
 .network-content .big{color:var(--cyan)}
-.carousel-toggle{position:absolute;z-index:4;right:20px;bottom:20px;width:54px;height:54px;padding:0;border:1px solid rgba(255,255,255,.5);border-radius:50%;display:grid;place-items:center;background:rgba(3,14,34,.96);color:#fff;cursor:pointer;backdrop-filter:blur(8px);box-shadow:0 8px 24px rgba(0,0,0,.35)}
+.carousel-toggle{position:absolute;z-index:4;right:18px;bottom:16px;width:50px;height:50px;padding:0;border:1px solid rgba(255,255,255,.48);border-radius:50%;display:grid;place-items:center;background:rgba(3,14,34,.70);color:#fff;cursor:pointer;backdrop-filter:blur(10px);box-shadow:0 6px 18px rgba(0,0,0,.2)}
 .carousel-toggle svg{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg)}
-.carousel-toggle .progress-track{fill:none;stroke:rgba(255,255,255,.3);stroke-width:2.5}
+.carousel-toggle .progress-track{fill:none;stroke:rgba(255,255,255,.34);stroke-width:2.5}
 .carousel-toggle .progress-value{fill:none;stroke:var(--cyan);stroke-width:2.5;stroke-linecap:round;stroke-dasharray:150.8;stroke-dashoffset:150.8;transition:stroke-dashoffset .08s linear}
-.carousel-toggle .toggle-symbol{position:relative;width:19px;height:19px;fill:currentColor}
+.carousel-toggle .toggle-symbol{position:relative;width:18px;height:18px;fill:currentColor}
 .carousel-toggle:focus-visible{outline:3px solid var(--cyan);outline-offset:4px}
-@media(max-width:699px){.network-showcase{min-height:600px}.network-content{align-self:start;justify-self:center;width:calc(100% - 32px);margin:22px 16px;gap:14px;padding-bottom:48px}.network-showcase .tabs{width:100%;max-width:100%;justify-content:center;gap:7px;padding:10px}.network-showcase .tabs button{min-width:0;flex:1 1 0;padding:10px 9px;font-size:14px}.network-photo,.network-photo img{min-height:600px}.network-photo img{object-position:58% center}.photo-wash{background:linear-gradient(180deg,rgba(3,14,34,.82) 0%,rgba(3,14,34,.88) 44%,rgba(3,14,34,.97) 100%)}.network-content .offer{gap:13px}.network-content .tile{min-height:104px;padding:16px}.network-content .tile b{font-size:38px}.network-content .more{gap:11px}.carousel-toggle{right:14px;bottom:12px;width:46px;height:46px}}
+@media(max-width:699px){
+ .network-content{width:100%;padding:18px 14px 22px;gap:11px}
+ .network-showcase .tabs{width:100%;max-width:100%;justify-content:center;gap:7px;padding:9px}
+ .network-showcase .tabs button{min-width:0;flex:1 1 0;padding:9px 7px;font-size:13px}
+ .network-content .offer{gap:10px}
+ .network-content .tile{width:min(300px,100%);min-height:92px;padding:13px 16px}
+ .network-content .tile b{font-size:38px}
+ .network-content .more{gap:9px}
+ .network-photo img{object-position:62% center;transform:scale(1.05)}
+ .photo-wash{background:linear-gradient(180deg,rgba(3,14,34,.62) 0%,rgba(3,14,34,.46) 58%,rgba(3,14,34,.16) 100%)}
+ .carousel-toggle{right:12px;bottom:10px;width:44px;height:44px}
+}
 @media(prefers-reduced-motion:reduce){.network-photo .network-slide{transition:none}}
-/* Bright rectangular service illustrations */
-.v.service-card{position:relative;isolation:isolate;min-height:154px;overflow:hidden;padding:22px 22px;border:1px solid rgba(31,107,255,.16);border-radius:18px;color:#092149;background:linear-gradient(112deg,#ecfbff 0%,#d9f1ff 55%,#d6e7ff 100%);box-shadow:0 12px 28px rgba(7,26,58,.09)}
-.service-copy{position:relative;z-index:2;max-width:48%}
-.service-copy h3{color:#092149}
-.service-copy p{margin:4px 0 0;color:#29486f;font-size:15px}
-.v.service-card .service-copy p{color:#29486f}
-.service-copy p b{color:#071A3A}
-.service-art{position:absolute;z-index:1;right:82px;top:50%;width:190px;height:122px;transform:translateY(-50%);overflow:hidden;border-radius:15px;pointer-events:none;opacity:.96;box-shadow:0 8px 20px rgba(10,55,105,.1)}
+/* Results Checker and AFA service layout */
+.services-section{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(280px,.8fr);gap:24px;align-items:stretch}
+.service-panel{min-width:0;scroll-margin-top:110px}
+.service-panel h2{font-size:clamp(25px,4vw,32px)}
+.service-panel .lead{margin:8px 0 14px;min-height:48px}
+.service-card{position:relative;isolation:isolate;height:calc(100% - 78px);min-height:270px;overflow:hidden;padding:20px;border:1px solid rgba(31,107,255,.16);border-radius:18px;color:#092149;background:linear-gradient(112deg,#ecfbff 0%,#d9f1ff 55%,#d6e7ff 100%);box-shadow:0 12px 28px rgba(7,26,58,.09)}
+.results-intro{position:relative;z-index:2;max-width:62%;min-height:92px}
+.results-intro h3,.afa-card h3{color:#092149;font-size:20px}
+.results-intro p{margin:5px 0 0;color:#29486f;font-size:14px;line-height:1.45}
+.service-art{position:absolute;z-index:1;right:16px;top:12px;width:176px;height:112px;overflow:hidden;border-radius:15px;pointer-events:none;opacity:.78;box-shadow:0 8px 20px rgba(10,55,105,.08)}
 .service-art svg{display:block;width:100%;height:100%}
-.v.service-card>.btn{position:relative;z-index:3;flex:0 0 auto;white-space:nowrap}
-.v.service-card.afa-card{background:linear-gradient(112deg,#e8fff8 0%,#d8f8f0 54%,#d5edff 100%);border-color:rgba(0,155,139,.18)}
-.v.service-card.afa-card .service-art{right:96px}
-@media(max-width:699px){.v.service-card{min-height:142px;padding:17px 14px;gap:8px}.service-copy{max-width:50%}.service-copy h3{font-size:17px}.service-copy p{font-size:13px;line-height:1.4}.service-art{right:62px;width:116px;height:92px;opacity:.72;border-radius:12px}.v.service-card.afa-card .service-art{right:64px;width:118px}.v.service-card>.btn{padding:10px 12px;font-size:13px}}
+.result-options{position:relative;z-index:2;display:grid;gap:10px}
+.result-option{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 13px;background:rgba(255,255,255,.84);border:1px solid rgba(31,107,255,.16);border-radius:13px;box-shadow:0 5px 14px rgba(10,55,105,.05)}
+.result-meta{display:flex;flex-direction:column;min-width:0}
+.result-meta strong{font:800 16px/1.25 Sora,system-ui,sans-serif;color:#092149}
+.result-meta span{font-size:12px;line-height:1.35;color:#496486}
+.result-price{font-size:14px;font-weight:800;color:#092149;white-space:nowrap}
+.result-option .btn{padding:9px 14px;font-size:13px;white-space:nowrap}
+.afa-card{display:flex;flex-direction:column;justify-content:space-between;background:linear-gradient(112deg,#e8fff8 0%,#d8f8f0 54%,#d5edff 100%);border-color:rgba(0,155,139,.18)}
+.afa-card .service-copy{position:relative;z-index:2;max-width:64%}
+.afa-card .service-copy p{margin:6px 0 0;color:#29486f;font-size:15px}
+.afa-card .service-copy p b{color:#071A3A}
+.afa-card .service-art{top:auto;right:10px;bottom:16px;width:158px;height:116px;opacity:.82}
+.afa-card>.btn{position:relative;z-index:3;align-self:flex-start;margin-top:18px;white-space:nowrap}
+@media(max-width:760px){
+ .bar{padding:9px 14px;gap:6px 16px;flex-wrap:wrap}
+ .logo img{height:36px}
+ .header-links{order:3;flex:1 0 100%;width:100%;justify-content:flex-start;gap:18px;overflow-x:auto;padding:2px 0 5px;scrollbar-width:none}
+ .header-links::-webkit-scrollbar{display:none}
+ .site-nav{flex:0 0 auto;justify-content:flex-start;gap:20px}
+ .site-nav a{font-size:13px}
+ .header-buy{padding:8px 14px;font-size:13px}
+ .services-section{grid-template-columns:1fr;gap:20px}
+ .service-panel .lead{min-height:0}
+ .service-card{height:auto;min-height:0;padding:17px 15px}
+ .results-intro{max-width:72%;min-height:82px}
+ .service-art{right:8px;width:130px;height:88px;opacity:.34}
+ .result-option{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 10px;padding:11px}
+ .result-price{grid-column:2;grid-row:1}
+ .result-option .btn{grid-column:1/-1;justify-self:start;padding:8px 13px}
+ .afa-card{min-height:225px}
+ .afa-card .service-copy{max-width:68%}
+ .afa-card .service-art{right:0;width:135px;height:105px;opacity:.48}
+}
 
 .offer{display:grid;gap:16px;align-items:center}
 @media(min-width:700px){.offer{grid-template-columns:260px 1fr;gap:28px}}
@@ -122,7 +171,21 @@ h2{font-size:clamp(26px,5vw,36px);font-weight:700}
 @media(prefers-reduced-motion:reduce){.step-card{transition:none}.step-card:hover{transform:none}}
 
 footer{margin-top:64px;background:var(--navy);color:#C9D8F6;padding:36px 20px calc(36px + env(safe-area-inset-bottom,0px))}
-footer div{max-width:1100px;margin:auto;display:flex;flex-wrap:wrap;gap:12px 32px;justify-content:space-between;align-items:center}
+footer>.footer-inner{max-width:1100px;margin:auto;display:flex;flex-wrap:wrap;gap:18px 32px;justify-content:space-between;align-items:center}
+.footer-brand{display:flex;align-items:center;gap:16px;max-width:560px}
+.footer-brand p{margin:5px 0 0;color:#C9D8F6;font-size:14px}
+.footer-actions{display:flex;flex-wrap:wrap;gap:10px}
+.contact-btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-width:178px;transition:background .2s ease,border-color .2s ease,color .2s ease,transform .2s ease,box-shadow .2s ease}
+.contact-btn .contact-icon{display:grid;place-items:center;width:21px;height:21px;flex:0 0 21px}
+.contact-btn .contact-icon svg{display:block;width:21px;height:21px;fill:currentColor}
+.contact-btn:hover{transform:translateY(-2px);color:#fff;box-shadow:0 7px 18px rgba(0,0,0,.2)}
+.contact-btn.whatsapp:hover,.contact-btn.whatsapp:focus-visible{background:#25D366;border-color:#25D366;color:#06351b}
+.contact-btn.email:hover,.contact-btn.email:focus-visible{background:#EA4335;border-color:#EA4335;color:#fff}
+@media(max-width:699px){.footer-brand{align-items:flex-start}.footer-brand img{width:96px;height:auto!important}.footer-actions{width:100%}.footer-actions .btn{flex:1;text-align:center;min-width:0}}
+.footer-bottom{max-width:1100px;margin:26px auto 0;padding-top:16px;border-top:1px solid rgba(201,216,246,.2);text-align:center;color:#aebfdf;font-size:13px;line-height:1.6}
+.footer-bottom a{color:#fff;font-weight:800;text-decoration:none;transition:color .2s ease}
+.footer-bottom a:hover,.footer-bottom a:focus-visible{color:var(--cyan);text-decoration:underline}
+@media(max-width:699px){.footer-bottom{margin-top:22px;padding-top:14px;font-size:12px}}
 footer strong{color:#fff;font-family:Sora,system-ui,sans-serif}
 @media(prefers-reduced-motion:reduce){.track{transition:none}}
 </style>
@@ -136,7 +199,13 @@ footer strong{color:#fff;font-family:Sora,system-ui,sans-serif}
 
 <header><div class="bar">
 <a class="logo" href="#top" aria-label="DATAL GHANA home"><img src="logo.png" alt="DATAL GHANA – Connected Everywhere" width="92" height="44"></a>
-<a class="btn" href="#bundles" data-store>Buy data</a></div></header>
+<div class="header-links"><nav class="site-nav" aria-label="Main navigation">
+<a href="#bundles">Data Bundles</a>
+<a href="#vouchers">Results Checker</a>
+<a href="#afa">AFA Registration</a>
+<a href="#how">How It Works</a>
+<a href="#contact">Contact</a>
+</nav><a class="btn header-buy" href="https://datalghana.budgetdata.store/" target="_blank" rel="noopener">Buy Data</a></div></div></header>
 
 <div class="hero" id="top" aria-roledescription="carousel" aria-label="Highlights">
 <div class="track" id="track">
@@ -165,12 +234,27 @@ footer strong{color:#fff;font-family:Sora,system-ui,sans-serif}
 </div>
 </div></section>
 
-<section id="vouchers"><h2>Results checker vouchers</h2><p class="lead">Official voucher for checking exam results online.</p>
-<div class="vouch">
-<div class="v service-card voucher-card"><div class="service-copy"><h3>BECE</h3><p>Check BECE results<br><b>GHS 27.00</b></p></div><div class="service-art" aria-hidden="true"><svg viewBox="0 0 240 150" xmlns="http://www.w3.org/2000/svg"><rect width="240" height="150" rx="16" fill="#C8F0FF"/><circle cx="195" cy="27" r="22" fill="#8CE6DC"/><rect x="82" y="20" width="93" height="112" rx="10" fill="#fff" stroke="#78C5E8" stroke-width="3"/><path d="M99 43h57M99 57h45M99 71h35" stroke="#7BA9CF" stroke-width="5" stroke-linecap="round"/><path d="M99 88h48M99 101h33" stroke="#B3D5E8" stroke-width="4" stroke-linecap="round"/><circle cx="155" cy="107" r="18" fill="#19B99A"/><path d="m146 107 6 6 12-14" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="m45 48 23-11 23 11-23 11z" fill="#1F6BFF"/><path d="M55 54v12c8 7 18 7 26 0V54" fill="#4D8DFF"/><path d="M89 48v16" stroke="#1F6BFF" stroke-width="3" stroke-linecap="round"/></svg></div><a class="btn" href="#" data-store>Buy</a></div>
-<div class="v service-card voucher-card"><div class="service-copy"><h3>WASSCE</h3><p>Check SHS WAEC results<br><b>GHS 27.00</b></p></div><div class="service-art" aria-hidden="true"><svg viewBox="0 0 240 150" xmlns="http://www.w3.org/2000/svg"><rect width="240" height="150" rx="16" fill="#D8E8FF"/><circle cx="193" cy="35" r="24" fill="#B8D4FF"/><rect x="75" y="18" width="96" height="116" rx="10" fill="#fff" stroke="#8CB5EE" stroke-width="3"/><path d="M94 43h57M94 58h47M94 73h51" stroke="#83A9D8" stroke-width="5" stroke-linecap="round"/><path d="M94 91h43" stroke="#B4C9E4" stroke-width="4" stroke-linecap="round"/><circle cx="151" cy="105" r="18" fill="#1F6BFF"/><path d="m142 105 6 6 12-14" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="m43 48 23-11 23 11-23 11z" fill="#19B99A"/><path d="M53 54v12c8 7 18 7 26 0V54" fill="#6BD8C2"/></svg></div><a class="btn" href="#" data-store>Buy</a></div></div></section>
-
-<section id="afa"><h2>AFA registration</h2><p class="lead">Register your MTN number for AFA and enjoy bundle benefits.</p><div class="v service-card afa-card"><div class="service-copy"><h3>MTN AFA</h3><p>Registration fee<br><b>GHS 25.00</b></p></div><div class="service-art" aria-hidden="true"><svg viewBox="0 0 240 150" xmlns="http://www.w3.org/2000/svg"><rect width="240" height="150" rx="16" fill="#C9F5EC"/><circle cx="190" cy="31" r="23" fill="#8EE3D3"/><rect x="84" y="12" width="69" height="126" rx="13" fill="#fff" stroke="#62BFB0" stroke-width="4"/><rect x="93" y="29" width="51" height="77" rx="6" fill="#EAFBFF"/><path d="M105 44h27M105 57h20" stroke="#79B7D6" stroke-width="4" stroke-linecap="round"/><path d="M111 73h14v20h-14z" fill="#FFD166" stroke="#E5A93C" stroke-width="2"/><circle cx="119" cy="120" r="4" fill="#67C6B3"/><circle cx="168" cy="91" r="25" fill="#1F6BFF"/><path d="m156 91 8 8 17-19" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><path d="M42 50c9-9 23-9 32 0M35 39c13-14 34-14 47 0" fill="none" stroke="#079AB5" stroke-width="5" stroke-linecap="round"/></svg></div><a class="btn" href="#" data-store>Register</a></div></section>
+<section class="services-section" aria-label="Results Checker and AFA Registration">
+<article id="vouchers" class="service-panel">
+<div class="panel-heading"><h2>Results Checker</h2><p class="lead">Get your BECE or WASSCE results checker voucher online.</p></div>
+<div class="service-card results-card">
+<div class="results-intro"><h3>Choose your examination</h3><p>One place for both BECE and WASSCE results checker vouchers.</p></div>
+<div class="service-art" aria-hidden="true"><svg viewBox="0 0 240 150" xmlns="http://www.w3.org/2000/svg"><rect width="240" height="150" rx="16" fill="#C8F0FF"/><circle cx="195" cy="27" r="22" fill="#8CE6DC"/><rect x="82" y="20" width="93" height="112" rx="10" fill="#fff" stroke="#78C5E8" stroke-width="3"/><path d="M99 43h57M99 57h45M99 71h35" stroke="#7BA9CF" stroke-width="5" stroke-linecap="round"/><path d="M99 88h48M99 101h33" stroke="#B3D5E8" stroke-width="4" stroke-linecap="round"/><circle cx="155" cy="107" r="18" fill="#19B99A"/><path d="m146 107 6 6 12-14" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="m45 48 23-11 23 11-23 11z" fill="#1F6BFF"/><path d="M55 54v12c8 7 18 7 26 0V54" fill="#4D8DFF"/></svg></div>
+<div class="result-options">
+<div class="result-option"><div class="result-meta"><strong>BECE</strong><span>Basic Education Certificate Examination</span></div><span class="result-price">GHS 27.00</span><a class="btn" href="#" data-store>Buy</a></div>
+<div class="result-option"><div class="result-meta"><strong>WASSCE</strong><span>West African Senior School Certificate Examination</span></div><span class="result-price">GHS 27.00</span><a class="btn" href="#" data-store>Buy</a></div>
+</div>
+</div>
+</article>
+<article id="afa" class="service-panel">
+<div class="panel-heading"><h2>AFA Registration</h2><p class="lead">Register your MTN number for AFA and enjoy bundle benefits.</p></div>
+<div class="service-card afa-card">
+<div class="service-copy"><h3>MTN AFA</h3><p>Registration fee<br><b>GHS 25.00</b></p></div>
+<div class="service-art" aria-hidden="true"><svg viewBox="0 0 240 150" xmlns="http://www.w3.org/2000/svg"><rect width="240" height="150" rx="16" fill="#C9F5EC"/><circle cx="190" cy="31" r="23" fill="#8EE3D3"/><rect x="84" y="12" width="69" height="126" rx="13" fill="#fff" stroke="#62BFB0" stroke-width="4"/><rect x="93" y="29" width="51" height="77" rx="6" fill="#EAFBFF"/><path d="M105 44h27M105 57h20" stroke="#79B7D6" stroke-width="4" stroke-linecap="round"/><path d="M111 73h14v20h-14z" fill="#FFD166" stroke="#E5A93C" stroke-width="2"/><circle cx="119" cy="120" r="4" fill="#67C6B3"/><circle cx="168" cy="91" r="25" fill="#1F6BFF"/><path d="m156 91 8 8 17-19" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><path d="M42 50c9-9 23-9 32 0M35 39c13-14 34-14 47 0" fill="none" stroke="#079AB5" stroke-width="5" stroke-linecap="round"/></svg></div>
+<a class="btn" href="#" data-store>Register</a>
+</div>
+</article>
+</section>
 
 <section id="how"><h2>How it works</h2><p class="lead">Three steps, all from your phone.</p>
 <div class="steps">
@@ -180,7 +264,23 @@ footer strong{color:#fff;font-family:Sora,system-ui,sans-serif}
 </div></section>
 </main>
 
-<footer><div><img src="logo.png" alt="DATAL GHANA – Connected Everywhere" width="140" height="67" style="height:67px;width:auto"><a class="btn alt" id="wa" href="#" hidden>Chat on WhatsApp</a><a class="btn alt" href="mailto:datalghana@gmail.com">Email us</a></div></footer>
+<footer id="contact">
+<div class="footer-inner">
+<div class="footer-brand">
+<img src="logo.png" alt="DATAL GHANA – Connected Everywhere" width="140" height="67" style="height:67px;width:auto">
+<div><strong>Contact DATAL GHANA</strong><p>Need help with a bundle, results voucher or AFA registration? Reach us directly.</p></div>
+</div>
+<div class="footer-actions">
+<a class="btn alt contact-btn whatsapp" id="wa" href="https://wa.me/233203804664" target="_blank" rel="noopener" aria-label="Chat with DATAL GHANA on WhatsApp">
+<span class="contact-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12.04 2a9.85 9.85 0 0 0-8.42 14.97L2.3 22l5.2-1.36A9.95 9.95 0 1 0 12.04 2Zm0 18.1a8.1 8.1 0 0 1-4.13-1.13l-.3-.18-3.08.8.82-3-.2-.31A8.12 8.12 0 1 1 12.04 20.1Zm4.46-6.08c-.24-.12-1.43-.7-1.65-.78-.22-.08-.38-.12-.54.12-.16.24-.62.78-.76.94-.14.16-.28.18-.52.06-.24-.12-1.02-.38-1.94-1.2-.72-.64-1.2-1.43-1.34-1.67-.14-.24-.02-.37.1-.49.1-.1.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.2-.46-.4-.4-.54-.4h-.46c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.68 2.56 4.06 3.58.57.24 1.02.39 1.37.5.58.18 1.1.15 1.52.09.46-.07 1.43-.58 1.63-1.14.2-.56.2-1.04.14-1.14-.06-.1-.22-.16-.46-.28Z"/></svg></span>
+<span>Chat on WhatsApp</span></a>
+<a class="btn alt contact-btn email" href="mailto:datalghana@gmail.com" aria-label="Email DATAL GHANA">
+<span class="contact-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3.2 5.2h17.6c.66 0 1.2.54 1.2 1.2v11.2c0 .66-.54 1.2-1.2 1.2H3.2c-.66 0-1.2-.54-1.2-1.2V6.4c0-.66.54-1.2 1.2-1.2Zm8.8 7.35L20.1 7H3.9l8.1 5.55Zm0 2.02L4 8.95v8.1h16v-8.1l-8 5.62Z"/></svg></span>
+<span>Email us</span></a>
+</div>
+</div>
+<div class="footer-bottom">© 2026 Datal Ghana. All rights reserved. Powered by <a href="https://datalghana.budgetdata.store/" target="_blank" rel="noopener"><strong>Datal Ghana</strong></a></div>
+</footer>
 
 <script>
 // EDIT THESE
@@ -194,8 +294,6 @@ const OFFERS=[
  {id:"ishare",name:"AirtelTigo",color:"#E4002B",size:1,price:5.8}
 ];
 document.querySelectorAll("[data-store]").forEach(a=>{if(a.getAttribute("href")==="#")a.href=STORE_URL;a.target="_blank";a.rel="noopener"});
-if(WHATSAPP){const w=document.getElementById("wa");w.href=WHATSAPP;w.hidden=false}
-
 const tabs=document.getElementById("tabs"),grid=document.getElementById("grid");
 function show(o){
  [...tabs.children].forEach(b=>b.setAttribute("aria-selected",b.dataset.id===o.id));
