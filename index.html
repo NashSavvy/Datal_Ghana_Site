@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>DATAL GHANA – Connected Everywhere</title>
+<meta name="description" content="DATAL GHANA: affordable MTN, Telecel and AirtelTigo data bundles, BECE and WASSCE vouchers and MTN AFA registration. Connected Everywhere.">
+<meta name="theme-color" content="#071A3A">
+<meta property="og:title" content="DATAL GHANA – Connected Everywhere">
+<meta property="og:description" content="Affordable data bundles, results checker vouchers and AFA registration in Ghana.">
+<meta property="og:type" content="website">
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;700;800&display=swap">
+<style>
+:root{--navy:#071A3A;--blue:#1F6BFF;--cyan:#19D3F3;--bg:#F5F8FF;--ink:#0B1B3A;--muted:#4B5D80;--card:#fff;--line:#D9E2F5;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#050F24;--ink:#EAF1FF;--muted:#9FB3DA;--card:#0B1B3A;--line:#1B2E57;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#050F24;--ink:#EAF1FF;--muted:#9FB3DA;--card:#0B1B3A;--line:#1B2E57;color-scheme:dark}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 80px)}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--navy);z-index:10}
+h1,h2,h3,.logo{font-family:Sora,system-ui,sans-serif;margin:0}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--cyan);outline-offset:2px}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--navy);color:#fff}
+.bar{max-width:1100px;margin:auto;display:flex;align-items:center;justify-content:space-between;padding:12px 20px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.04em;text-decoration:none}
+.logo small{font-weight:500;opacity:.75;letter-spacing:.04em}
+.logo img{display:block;height:44px;width:auto}
+.btn{display:inline-block;background:var(--blue);color:#fff;text-decoration:none;font-weight:700;padding:11px 20px;border-radius:999px;border:0;cursor:pointer;font-size:15px}
+.btn.alt{background:transparent;border:2px solid #fff}
+.btn:hover{filter:brightness(1.1)}
+/* hero carousel */
+.hero{position:relative;background:var(--navy);color:#fff;overflow:hidden}
+.track{display:flex;transition:transform .7s cubic-bezier(.65,0,.25,1)}
+.slide{flex:0 0 100%;min-height:440px;max-width:1100px;margin:auto;padding:56px 20px 88px;display:grid;align-content:center;position:relative}
+.slide h1{font-size:clamp(34px,8vw,64px);line-height:1.05;max-width:12ch;font-weight:800}
+.slide p{font-size:clamp(17px,2.4vw,20px);max-width:34ch;color:#C9D8F6;margin:18px 0 28px}
+.slide .cta{display:flex;gap:12px;flex-wrap:wrap}
+.net{position:absolute;right:-90px;top:50%;width:420px;height:420px;margin-top:-210px;opacity:.55;pointer-events:none}
+.s2 .net{transform:rotate(60deg) scale(1.15)}.s3 .net{transform:rotate(140deg) scale(.9)}
+.ctrl{position:absolute;left:0;right:0;bottom:26px;max-width:1100px;margin:auto;padding:0 20px;display:flex;align-items:center;justify-content:space-between}
+.dots{display:flex;gap:10px}
+.dots button{width:34px;height:6px;border-radius:3px;border:0;background:#2C4A86;cursor:pointer;padding:0}
+.dots button[aria-current="true"]{background:var(--cyan)}
+.arrows button{width:44px;height:44px;border-radius:50%;border:2px solid #2C4A86;background:transparent;color:#fff;font-size:20px;cursor:pointer;margin-left:8px}
+/* sections */
+main section{max-width:1100px;margin:auto;padding:56px 20px 0}
+h2{font-size:clamp(26px,5vw,36px);font-weight:700}
+.lead{color:var(--muted);max-width:52ch;margin:8px 0 24px}
+.tabs{display:flex;gap:12px;overflow-x:auto;padding:6px 8px 10px;margin:0 -8px 10px}
+.tabs button{flex:0 0 auto;padding:10px 18px;border-radius:999px;border:2px solid var(--line);background:var(--card);color:var(--ink);font-weight:700;cursor:pointer;font-size:15px}
+.tabs button{transition:transform .2s,box-shadow .2s}
+.tabs button[data-id="mtn"]{background:#FFCB05;border-color:#FFCB05;color:#111}
+.tabs button[data-id="telecel"]{background:#E60000;border-color:#E60000;color:#fff}
+.tabs button[data-id="ishare"]{background:linear-gradient(90deg,#E4002B,#1F4FD8);border-color:transparent;color:#fff}
+.tabs button[aria-selected="true"]{box-shadow:0 0 0 3px var(--bg),0 0 0 5px var(--ink);transform:translateY(-2px)}
+.offer{display:grid;gap:16px;align-items:center}
+@media(min-width:700px){.offer{grid-template-columns:260px 1fr;gap:28px}}
+.tile{display:flex;flex-direction:column;gap:6px;padding:22px;border:2px solid var(--brand,var(--blue));border-radius:16px;background:var(--card)}
+.tile b{font:800 44px/1 Sora,system-ui,sans-serif}
+.tile span{color:var(--muted);font-size:15px}
+.more p{margin:0 0 14px;color:var(--muted);max-width:44ch}
+.big{position:relative;display:inline-block;font:800 1.35em/1 Sora,system-ui,sans-serif;letter-spacing:.06em;color:var(--blue);transform-origin:50% 80%;animation:pop 1.8s ease-in-out infinite}
+.big::before,.big::after{content:"";position:absolute;left:50%;top:50%;width:100%;height:150%;border-radius:50%;border:2px solid currentColor;opacity:0;z-index:-1;pointer-events:none;transform:translate(-50%,-50%) scale(.6);animation:splash 1.8s ease-out infinite}
+.big::after{animation-delay:.3s}
+@keyframes pop{0%,100%{transform:scale(1) rotate(0);text-shadow:0 0 0 transparent}50%{transform:scale(1.14) rotate(-3deg);text-shadow:0 0 16px currentColor}}
+@keyframes splash{0%{transform:translate(-50%,-50%) scale(.6);opacity:.75}70%,100%{transform:translate(-50%,-50%) scale(2.2,2);opacity:0}}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]) .big{color:var(--cyan)}}
+:root[data-theme="dark"] .big{color:var(--cyan)}
+@media(prefers-reduced-motion:reduce){.big{animation:none}.big::before,.big::after{display:none}}
+.vouch{display:grid;gap:12px}
+@media(min-width:700px){.vouch{grid-template-columns:1fr 1fr}}
+.v{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px;border-radius:14px;background:var(--navy);color:#fff}
+.v p{margin:4px 0 0;color:#C9D8F6;font-size:15px}
+.steps{display:grid;gap:20px}
+@media(min-width:700px){.steps{grid-template-columns:repeat(3,1fr)}}
+.steps h3{font-size:19px;margin-bottom:6px}.steps p{margin:0;color:var(--muted)}
+footer{margin-top:64px;background:var(--navy);color:#C9D8F6;padding:36px 20px calc(36px + env(safe-area-inset-bottom,0px))}
+footer div{max-width:1100px;margin:auto;display:flex;flex-wrap:wrap;gap:12px 32px;justify-content:space-between;align-items:center}
+footer strong{color:#fff;font-family:Sora,system-ui,sans-serif}
+@media(prefers-reduced-motion:reduce){.track{transition:none}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="net" viewBox="0 0 400 400" fill="none" stroke="#19D3F3" stroke-width="1.5">
+<circle cx="200" cy="200" r="150" stroke-opacity=".5"/><ellipse cx="200" cy="200" rx="150" ry="60" stroke-opacity=".35"/><ellipse cx="200" cy="200" rx="60" ry="150" stroke-opacity=".35"/>
+<path d="M90 120L200 60L320 130L340 260L220 340L100 280Z" stroke="#1F6BFF" stroke-width="2"/><path d="M90 120L220 340M200 60L100 280M320 130L100 280" stroke-opacity=".5"/>
+<g fill="#19D3F3" stroke="none"><circle cx="90" cy="120" r="7"/><circle cx="200" cy="60" r="9"/><circle cx="320" cy="130" r="7"/><circle cx="340" cy="260" r="8"/><circle cx="220" cy="340" r="7"/><circle cx="100" cy="280" r="9"/></g></symbol></defs></svg>
+
+<header><div class="bar">
+<a class="logo" href="#top" aria-label="DATAL GHANA home"><img src="logo.png" alt="DATAL GHANA – Connected Everywhere" width="92" height="44"></a>
+<a class="btn" href="#bundles" data-store>Buy data</a></div></header>
+
+<div class="hero" id="top" aria-roledescription="carousel" aria-label="Highlights">
+<div class="track" id="track">
+<div class="slide s1"><svg class="net" aria-hidden="true"><use href="#net"/></svg><h1>Big data. Long validity.</h1><p>Welcome to DATAL GHANA. Affordable bundles for MTN, Telecel and AirtelTigo, ready when you are.</p><div class="cta"><a class="btn" href="#bundles">See bundles</a><a class="btn alt" href="#how">How it works</a></div></div>
+<div class="slide s2"><svg class="net" aria-hidden="true"><use href="#net"/></svg><h1>Connected everywhere.</h1><p>Top up your own number or send data to family and friends across Ghana.</p><div class="cta"><a class="btn" href="#bundles">Choose a network</a></div></div>
+<div class="slide s3"><svg class="net" aria-hidden="true"><use href="#net"/></svg><h1>Results checkers, sorted.</h1><p>Get your BECE or WASSCE results checker voucher without queuing.</p><div class="cta"><a class="btn" href="#vouchers">Get a voucher</a></div></div>
+</div>
+<div class="ctrl"><div class="dots" id="dots"></div><div class="arrows"><button id="prev" aria-label="Previous slide">‹</button><button id="next" aria-label="Next slide">›</button></div></div>
+</div>
+
+<main>
+<section id="bundles"><h2>Data bundles</h2><p class="lead">Choose your network to see our starting price, then explore every offer in our store.</p>
+<div class="tabs" role="tablist" id="tabs"></div><div class="offer" id="grid"></div></section>
+
+<section id="vouchers"><h2>Results checker vouchers</h2><p class="lead">Official voucher for checking exam results online.</p>
+<div class="vouch">
+<div class="v"><div><h3>BECE</h3><p>Check BECE results<br><b>GHS 27.00</b></p></div><a class="btn" href="#" data-store>Buy</a></div>
+<div class="v"><div><h3>WASSCE</h3><p>Check SHS WAEC results<br><b>GHS 27.00</b></p></div><a class="btn" href="#" data-store>Buy</a></div></div></section>
+
+<section id="afa"><h2>AFA registration</h2><p class="lead">Register your MTN number for AFA and enjoy bundle benefits.</p><div class="v"><div><h3>MTN AFA</h3><p>Registration fee<br><b>GHS 25.00</b></p></div><a class="btn" href="#" data-store>Register</a></div></section>
+
+<section id="how"><h2>How it works</h2><p class="lead">Three steps, all from your phone.</p>
+<div class="steps"><div><h3>Choose</h3><p>Select your network and bundle size.</p></div><div><h3>Pay</h3><p>Complete payment in our secure store.</p></div><div><h3>Receive</h3><p>Your data or voucher is sent to the number you entered.</p></div></div></section>
+</main>
+
+<footer><div><img src="logo.png" alt="DATAL GHANA – Connected Everywhere" width="140" height="67" style="height:67px;width:auto"><a class="btn alt" id="wa" href="#" hidden>Chat on WhatsApp</a><a class="btn alt" href="mailto:datalghana@gmail.com">Email us</a></div></footer>
+
+<script>
+// EDIT THESE
+const STORE_URL = "https://datalghana.budgetdata.store/";   // your Datacoregh store link
+const WHATSAPP  = "https://wa.me/233203804664";                              // e.g. "https://wa.me/233XXXXXXXXX"
+
+// Starting bundle shown for each network (size in GB, price in GHS)
+const OFFERS=[
+ {id:"mtn",name:"MTN",color:"#FFCB05",size:1,price:5.5},
+ {id:"telecel",name:"Telecel",color:"#E60000",size:10,price:43},
+ {id:"ishare",name:"AirtelTigo",color:"#E4002B",size:1,price:5.8}
+];
+document.querySelectorAll("[data-store]").forEach(a=>{if(a.getAttribute("href")==="#")a.href=STORE_URL;a.target="_blank";a.rel="noopener"});
+if(WHATSAPP){const w=document.getElementById("wa");w.href=WHATSAPP;w.hidden=false}
+
+const tabs=document.getElementById("tabs"),grid=document.getElementById("grid");
+function show(o){
+ [...tabs.children].forEach(b=>b.setAttribute("aria-selected",b.dataset.id===o.id));
+ grid.style.setProperty("--brand",o.color);grid.innerHTML=`<div class="tile"><b>${o.size}GB</b><span>Starting from GHS ${o.price.toFixed(2)}</span></div><div class="more"><p><strong class="big">BIG</strong> bundles at lower prices are waiting for you. See more ${o.name} offers in our store.</p><a class="btn" href="${STORE_URL}" target="_blank" rel="noopener">See more offers</a></div>`;
+}
+OFFERS.forEach((o,n)=>{const b=document.createElement("button");b.role="tab";b.textContent=o.name;b.dataset.id=o.id;b.onclick=()=>show(o);tabs.append(b)});
+show(OFFERS[0]);
+
+// carousel
+const track=document.getElementById("track"),slides=[...track.children],dots=document.getElementById("dots"),hero=document.getElementById("top");
+let i=0,timer;
+slides.forEach((_,n)=>{const b=document.createElement("button");b.setAttribute("aria-label","Go to slide "+(n+1));b.onclick=()=>{go(n);play()};dots.append(b)});
+function go(n){i=(n+slides.length)%slides.length;track.style.transform=`translateX(-${i*100}%)`;[...dots.children].forEach((d,k)=>d.setAttribute("aria-current",k===i))}
+function stop(){clearInterval(timer)}
+function play(){stop();if(!matchMedia("(prefers-reduced-motion: reduce)").matches)timer=setInterval(()=>go(i+1),6000)}
+document.getElementById("prev").onclick=()=>{go(i-1);play()};
+document.getElementById("next").onclick=()=>{go(i+1);play()};
+hero.addEventListener("mouseenter",stop);hero.addEventListener("mouseleave",play);hero.addEventListener("focusin",stop);
+let x0=null;hero.addEventListener("pointerdown",e=>x0=e.clientX);
+hero.addEventListener("pointerup",e=>{if(x0!==null&&Math.abs(e.clientX-x0)>50){go(i+(e.clientX<x0?1:-1));play()}x0=null});
+go(0);play();
+</script>
+</body>
+</html>
