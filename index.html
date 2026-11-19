@@ -29,9 +29,12 @@ header{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var
 .logo{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.04em;text-decoration:none;flex:0 0 auto}
 .logo small{font-weight:500;opacity:.75;letter-spacing:.04em}
 .logo img{display:block;height:44px;width:auto}
-.site-nav{display:flex;align-items:center;justify-content:flex-end;gap:clamp(12px,2vw,24px);min-width:0}
+.header-links{display:flex;align-items:center;justify-content:flex-end;gap:clamp(14px,2vw,24px);min-width:0;flex:1}
+.site-nav{display:flex;align-items:center;justify-content:flex-end;gap:clamp(12px,1.8vw,22px);min-width:0}
 .site-nav a{color:#dce8ff;text-decoration:none;font-size:14px;font-weight:700;white-space:nowrap;transition:color .2s ease}
 .site-nav a:hover,.site-nav a:focus-visible{color:var(--cyan)}
+.header-buy{flex:0 0 auto;padding:10px 17px;background:var(--cyan);color:#05213d;box-shadow:0 4px 14px rgba(25,211,243,.16);transition:background .2s ease,transform .2s ease,box-shadow .2s ease}
+.header-buy:hover{background:#fff;color:var(--navy);transform:translateY(-2px);box-shadow:0 7px 18px rgba(25,211,243,.24)}
 .btn{display:inline-block;background:var(--blue);color:#fff;text-decoration:none;font-weight:700;padding:11px 20px;border-radius:999px;border:0;cursor:pointer;font-size:15px}
 .btn.alt{background:transparent;border:2px solid #fff}
 .btn:hover{filter:brightness(1.1)}
@@ -123,9 +126,11 @@ h2{font-size:clamp(26px,5vw,36px);font-weight:700}
 @media(max-width:760px){
  .bar{padding:9px 14px;gap:6px 16px;flex-wrap:wrap}
  .logo img{height:36px}
- .site-nav{order:3;flex:1 0 100%;justify-content:flex-start;gap:20px;overflow-x:auto;padding:2px 0 4px;scrollbar-width:none}
- .site-nav::-webkit-scrollbar{display:none}
+ .header-links{order:3;flex:1 0 100%;width:100%;justify-content:flex-start;gap:18px;overflow-x:auto;padding:2px 0 5px;scrollbar-width:none}
+ .header-links::-webkit-scrollbar{display:none}
+ .site-nav{flex:0 0 auto;justify-content:flex-start;gap:20px}
  .site-nav a{font-size:13px}
+ .header-buy{padding:8px 14px;font-size:13px}
  .services-section{grid-template-columns:1fr;gap:20px}
  .service-panel .lead{min-height:0}
  .service-card{height:auto;min-height:0;padding:17px 15px}
@@ -170,10 +175,13 @@ footer>.footer-inner{max-width:1100px;margin:auto;display:flex;flex-wrap:wrap;ga
 .footer-brand{display:flex;align-items:center;gap:16px;max-width:560px}
 .footer-brand p{margin:5px 0 0;color:#C9D8F6;font-size:14px}
 .footer-actions{display:flex;flex-wrap:wrap;gap:10px}
-.contact-details{display:flex;flex-wrap:wrap;gap:10px 24px;width:100%;padding-top:14px;border-top:1px solid rgba(201,216,246,.22)}
-.contact-details a{color:#C9D8F6;text-decoration:none}
-.contact-details a:hover{color:var(--cyan)}
-@media(max-width:699px){.footer-brand{align-items:flex-start}.footer-brand img{width:96px;height:auto!important}.footer-actions{width:100%}.footer-actions .btn{flex:1;text-align:center}.contact-details{font-size:14px}}
+.contact-btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-width:178px;transition:background .2s ease,border-color .2s ease,color .2s ease,transform .2s ease,box-shadow .2s ease}
+.contact-btn .contact-icon{display:grid;place-items:center;width:21px;height:21px;flex:0 0 21px}
+.contact-btn .contact-icon svg{display:block;width:21px;height:21px;fill:currentColor}
+.contact-btn:hover{transform:translateY(-2px);color:#fff;box-shadow:0 7px 18px rgba(0,0,0,.2)}
+.contact-btn.whatsapp:hover,.contact-btn.whatsapp:focus-visible{background:#25D366;border-color:#25D366;color:#06351b}
+.contact-btn.email:hover,.contact-btn.email:focus-visible{background:#EA4335;border-color:#EA4335;color:#fff}
+@media(max-width:699px){.footer-brand{align-items:flex-start}.footer-brand img{width:96px;height:auto!important}.footer-actions{width:100%}.footer-actions .btn{flex:1;text-align:center;min-width:0}}
 footer strong{color:#fff;font-family:Sora,system-ui,sans-serif}
 @media(prefers-reduced-motion:reduce){.track{transition:none}}
 </style>
@@ -187,13 +195,13 @@ footer strong{color:#fff;font-family:Sora,system-ui,sans-serif}
 
 <header><div class="bar">
 <a class="logo" href="#top" aria-label="DATAL GHANA home"><img src="logo.png" alt="DATAL GHANA – Connected Everywhere" width="92" height="44"></a>
-<nav class="site-nav" aria-label="Main navigation">
+<div class="header-links"><nav class="site-nav" aria-label="Main navigation">
 <a href="#bundles">Data Bundles</a>
 <a href="#vouchers">Results Checker</a>
 <a href="#afa">AFA Registration</a>
 <a href="#how">How It Works</a>
 <a href="#contact">Contact</a>
-</nav></div></header>
+</nav><a class="btn header-buy" href="https://datalghana.budgetdata.store/" target="_blank" rel="noopener">Buy Data</a></div></div></header>
 
 <div class="hero" id="top" aria-roledescription="carousel" aria-label="Highlights">
 <div class="track" id="track">
@@ -259,12 +267,12 @@ footer strong{color:#fff;font-family:Sora,system-ui,sans-serif}
 <div><strong>Contact DATAL GHANA</strong><p>Need help with a bundle, results voucher or AFA registration? Reach us directly.</p></div>
 </div>
 <div class="footer-actions">
-<a class="btn alt" id="wa" href="https://wa.me/233203804664" target="_blank" rel="noopener">Chat on WhatsApp</a>
-<a class="btn alt" href="mailto:datalghana@gmail.com">Email us</a>
-</div>
-<div class="contact-details">
-<a href="https://wa.me/233203804664" target="_blank" rel="noopener">+233 20 380 4664</a>
-<a href="mailto:datalghana@gmail.com">datalghana@gmail.com</a>
+<a class="btn alt contact-btn whatsapp" id="wa" href="https://wa.me/233203804664" target="_blank" rel="noopener" aria-label="Chat with DATAL GHANA on WhatsApp">
+<span class="contact-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12.04 2a9.85 9.85 0 0 0-8.42 14.97L2.3 22l5.2-1.36A9.95 9.95 0 1 0 12.04 2Zm0 18.1a8.1 8.1 0 0 1-4.13-1.13l-.3-.18-3.08.8.82-3-.2-.31A8.12 8.12 0 1 1 12.04 20.1Zm4.46-6.08c-.24-.12-1.43-.7-1.65-.78-.22-.08-.38-.12-.54.12-.16.24-.62.78-.76.94-.14.16-.28.18-.52.06-.24-.12-1.02-.38-1.94-1.2-.72-.64-1.2-1.43-1.34-1.67-.14-.24-.02-.37.1-.49.1-.1.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.2-.46-.4-.4-.54-.4h-.46c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.68 2.56 4.06 3.58.57.24 1.02.39 1.37.5.58.18 1.1.15 1.52.09.46-.07 1.43-.58 1.63-1.14.2-.56.2-1.04.14-1.14-.06-.1-.22-.16-.46-.28Z"/></svg></span>
+<span>Chat on WhatsApp</span></a>
+<a class="btn alt contact-btn email" href="mailto:datalghana@gmail.com" aria-label="Email DATAL GHANA">
+<span class="contact-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3.2 5.2h17.6c.66 0 1.2.54 1.2 1.2v11.2c0 .66-.54 1.2-1.2 1.2H3.2c-.66 0-1.2-.54-1.2-1.2V6.4c0-.66.54-1.2 1.2-1.2Zm8.8 7.35L20.1 7H3.9l8.1 5.55Zm0 2.02L4 8.95v8.1h16v-8.1l-8 5.62Z"/></svg></span>
+<span>Email us</span></a>
 </div>
 </div>
 </footer>
@@ -281,8 +289,6 @@ const OFFERS=[
  {id:"ishare",name:"AirtelTigo",color:"#E4002B",size:1,price:5.8}
 ];
 document.querySelectorAll("[data-store]").forEach(a=>{if(a.getAttribute("href")==="#")a.href=STORE_URL;a.target="_blank";a.rel="noopener"});
-if(WHATSAPP){const w=document.getElementById("wa");w.href=WHATSAPP;w.hidden=false}
-
 const tabs=document.getElementById("tabs"),grid=document.getElementById("grid");
 function show(o){
  [...tabs.children].forEach(b=>b.setAttribute("aria-selected",b.dataset.id===o.id));
