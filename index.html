@@ -231,6 +231,36 @@ footer>.footer-inner{max-width:1100px;margin:auto;display:flex;flex-wrap:wrap;ga
 @media(max-width:699px){.footer-bottom{margin-top:22px;padding-top:14px;font-size:12px}}
 footer strong{color:#fff;font-family:Sora,system-ui,sans-serif}
 @media(prefers-reduced-motion:reduce){.track{transition:none}}
+
+/* Mandatory customer read-before-proceed notice */
+.notice-dialog{box-sizing:border-box;width:min(680px,calc(100% - 28px));max-width:680px;height:auto;max-height:min(88dvh,820px);padding:0;border:1px solid var(--line);border-radius:20px;background:var(--card);color:var(--ink);box-shadow:0 24px 80px rgba(0,0,0,.38);overflow:hidden}
+.notice-dialog[open]{display:flex;flex-direction:column}
+.notice-dialog::backdrop{background:rgba(3,12,30,.78);backdrop-filter:blur(5px)}
+.notice-head{display:flex;flex:0 0 auto;align-items:flex-start;justify-content:space-between;gap:16px;padding:22px 24px 16px;background:var(--navy);color:#fff}
+.notice-kicker{margin:0 0 5px;color:#9edff0;font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+.notice-head h2{font-size:clamp(22px,4vw,29px);line-height:1.2;color:#fff}
+.notice-head p{margin:7px 0 0;color:#d4e2fa;font-size:14px}
+.notice-sound{flex:0 0 auto;border:1px solid rgba(255,255,255,.42);border-radius:999px;padding:8px 12px;background:rgba(255,255,255,.1);color:#fff;font:700 12px system-ui;cursor:pointer}
+.notice-body{flex:1 1 auto;min-height:0;max-height:none;overflow-y:auto;overscroll-behavior:contain;padding:20px 24px 12px}
+.notice-welcome{margin:0 0 17px;color:var(--muted)}
+.notice-section{margin:0 0 18px}
+.notice-section h3{margin:0 0 9px;font-size:16px;color:var(--ink)}
+.notice-steps{margin:0;padding-left:23px;color:var(--muted)}
+.notice-steps li{padding:3px 0 3px 3px}
+.notice-delivery{padding:15px 16px;border:1px solid #efc75c;border-left:5px solid #e5a900;border-radius:13px;background:#fff8df;color:#34290d}
+.notice-delivery h3{color:#6d4b00}
+.notice-delivery p{margin:7px 0;color:#493a17}
+.notice-delivery a{color:#064eaa;font-weight:800;text-decoration:underline}
+.notice-delivery .delay{font-weight:900;color:#9a3d00}
+.notice-footer{box-sizing:border-box;flex:0 0 auto;padding:14px 24px 20px;border-top:1px solid var(--line);background:var(--card)}
+.notice-ack{display:flex;align-items:flex-start;gap:10px;color:var(--ink);font-size:14px;font-weight:650;cursor:pointer}
+.notice-ack input{width:19px;height:19px;flex:0 0 19px;margin:2px 0 0;accent-color:var(--blue)}
+.notice-continue{display:block;box-sizing:border-box;width:100%;min-height:48px;margin-top:14px;padding:13px 18px;border:0;border-radius:999px;background:var(--blue);color:#fff;font-size:15px;line-height:1.35;font-weight:800;white-space:normal;cursor:pointer}
+.notice-continue:disabled{background:#9aa8bd;cursor:not-allowed;opacity:.75}
+.notice-footnote{margin:9px 0 0;text-align:center;color:var(--muted);font-size:12px}
+@media(max-width:520px){.notice-head{padding:18px 17px 14px}.notice-head h2{font-size:22px}.notice-sound{font-size:11px;padding:7px 9px}.notice-body{padding:17px 17px 10px}.notice-footer{padding:13px 17px 17px}.notice-delivery{padding:13px}}
+@media(max-height:650px){.notice-dialog{max-height:94dvh}.notice-head{padding-top:13px;padding-bottom:11px}.notice-footer{padding-top:10px;padding-bottom:12px}}
+
 </style>
 </head>
 <body>
@@ -339,7 +369,53 @@ footer strong{color:#fff;font-family:Sora,system-ui,sans-serif}
 <div class="footer-bottom">© 2026 Datal Ghana. All rights reserved. Powered by <a href="https://datalghana.budgetdata.store/" target="_blank" rel="noopener"><strong>Datal Ghana</strong></a></div>
 </footer>
 
+
+<dialog class="notice-dialog" id="customerNotice" aria-labelledby="noticeTitle" aria-describedby="noticeIntro">
+ <div class="notice-head"><div><p class="notice-kicker">Important customer notice</p><h2 id="noticeTitle">Read Before You Proceed</h2><p>Please review these purchase and delivery details before shopping.</p></div><button class="notice-sound" id="noticeSound" type="button" aria-label="Play alert sound">🔔 Play alert</button></div>
+ <div class="notice-body">
+  <p class="notice-welcome" id="noticeIntro"><strong>WELCOME TO DATAL GHANA!</strong><br>Get affordable data bundles on MTN, Telecel and AirtelTigo (AT) at competitive prices.</p>
+  <section class="notice-section" aria-labelledby="noticePurchaseTitle"><h3 id="noticePurchaseTitle">🛒 How to purchase</h3><ol class="notice-steps"><li>Select your preferred network: MTN, Telecel or AT.</li><li>Choose your desired data bundle.</li><li>Enter the recipient's phone number correctly.</li><li>Review your order details and confirm your purchase.</li><li>Complete payment and wait for your bundle delivery.</li></ol></section>
+  <section class="notice-section notice-delivery" aria-labelledby="noticeDeliveryTitle"><h3 id="noticeDeliveryTitle">⚠️ Important delivery notice</h3><p>📢 MTN bundles may occasionally experience delays due to network traffic or technical issues.</p><p class="delay">⏳ In such cases, delivery may take between 30 minutes and 24 hours.</p><p>💡 We encourage you to purchase ahead of time to avoid inconvenience.</p><p>✅ Before payment, verify that the recipient's number is valid for the selected MTN offer using <a href="https://www.datacoregh.com/check-mtn?offer=mtn" target="_blank" rel="noopener noreferrer">Check MTN numbers | DataCoreGH</a>.</p></section>
+  <p class="notice-welcome"><strong>Thank you for choosing DATAL GHANA!</strong><br>🌍 Connected Everywhere.</p>
+ </div>
+ <div class="notice-footer"><label class="notice-ack"><input id="noticeAcknowledge" type="checkbox"><span>I have read and understood the purchase instructions and delivery notice.</span></label><button class="notice-continue" id="noticeContinue" type="button" disabled>I have read and understood — Continue</button><p class="notice-footnote">You must acknowledge this notice before continuing to the website.</p></div>
+</dialog>
+
 <script>
+
+ // Mandatory notice: acknowledgement is required on every page visit (no persistent "read" flag).
+ const customerNotice=document.getElementById("customerNotice");
+ const noticeAcknowledge=document.getElementById("noticeAcknowledge");
+ const noticeContinue=document.getElementById("noticeContinue");
+ const noticeSound=document.getElementById("noticeSound");
+ function playNoticeBeep(){
+  try{
+   const AudioContextClass=window.AudioContext||window.webkitAudioContext;
+   if(!AudioContextClass)return;
+   const audio=new AudioContextClass();
+   if(audio.state!=="running"){audio.close();return}
+   [0,.18].forEach(offset=>{
+    const oscillator=audio.createOscillator(),gain=audio.createGain();
+    oscillator.type="sine";oscillator.frequency.value=880;
+    gain.gain.setValueAtTime(.0001,audio.currentTime+offset);
+    gain.gain.exponentialRampToValueAtTime(.12,audio.currentTime+offset+.015);
+    gain.gain.exponentialRampToValueAtTime(.0001,audio.currentTime+offset+.11);
+    oscillator.connect(gain);gain.connect(audio.destination);
+    oscillator.start(audio.currentTime+offset);oscillator.stop(audio.currentTime+offset+.12);
+   });
+   window.setTimeout(()=>audio.close(),500);
+  }catch(error){/* Sound is optional; the mandatory visual notice remains. */}
+ }
+ if(customerNotice&&!customerNotice.open){customerNotice.showModal();playNoticeBeep()}
+ noticeAcknowledge?.addEventListener("change",()=>{noticeContinue.disabled=!noticeAcknowledge.checked});
+ noticeSound?.addEventListener("click",playNoticeBeep);
+ noticeContinue?.addEventListener("click",()=>{
+  if(!noticeAcknowledge.checked)return;
+  customerNotice.close();
+  document.dispatchEvent(new Event("datalCustomerNoticeAccepted"));
+ });
+ customerNotice?.addEventListener("cancel",event=>event.preventDefault());
+
 // EDIT THESE
 const STORE_URL = "https://datalghana.budgetdata.store/";   // your Datacoregh store link
 const WHATSAPP  = "https://wa.me/233203804664";                              // e.g. "https://wa.me/233XXXXXXXXX"
@@ -411,21 +487,23 @@ const DATAL_PULSE_CONFIG = {
   hideTimer=setTimeout(()=>{intro.hidden=true;intro.classList.remove("is-leaving")},500);
  }
  function showIntro(){
-  if(shownThisPage)return;
+  if(shownThisPage||(customerNotice&&customerNotice.open))return false;
   shownThisPage=true;rotateMessage();intro.hidden=false;
   requestAnimationFrame(()=>{intro.classList.add("is-visible");intro.setAttribute("aria-hidden","false");indicator.setAttribute("aria-expanded","true")});
-  clearTimeout(introTimer);introTimer=setTimeout(hideIntro,40000);
+  clearTimeout(introTimer);introTimer=setTimeout(hideIntro,20000);
+  return true;
  }
  indicator.addEventListener("click",()=>{
-  if(intro.hidden){shownThisPage=true;clearTimeout(introTimer);rotateMessage();intro.hidden=false;requestAnimationFrame(()=>{intro.classList.add("is-visible");intro.setAttribute("aria-hidden","false");indicator.setAttribute("aria-expanded","true")});introTimer=setTimeout(hideIntro,40000)}
+  if(intro.hidden){shownThisPage=true;clearTimeout(introTimer);rotateMessage();intro.hidden=false;requestAnimationFrame(()=>{intro.classList.add("is-visible");intro.setAttribute("aria-hidden","false");indicator.setAttribute("aria-expanded","true")});introTimer=setTimeout(hideIntro,20000)}
   else{clearTimeout(introTimer);hideIntro()}
  });
  close.addEventListener("click",hideIntro);
  document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!intro.hidden)hideIntro()});
  const observer=new IntersectionObserver(entries=>{
-  if(entries.some(entry=>entry.isIntersecting)){showIntro();observer.disconnect()}
+  if(entries.some(entry=>entry.isIntersecting)&&showIntro()){observer.disconnect()}
  },{threshold:.18});
  observer.observe(section);
+ document.addEventListener("datalCustomerNoticeAccepted",()=>{const rect=section.getBoundingClientRect();if(rect.top<window.innerHeight&&rect.bottom>0&&showIntro())observer.disconnect()});
  renderActivity();
  rotationTimer=setInterval(rotateMessage,20000);
  setInterval(renderActivity,60000);
