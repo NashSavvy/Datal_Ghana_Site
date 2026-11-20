@@ -474,8 +474,10 @@ const DATAL_PULSE_CONFIG = {
  let introTimer=null,rotationTimer=null,shownThisPage=false,hideTimer=null,activityTimer=null;
  const randomBetween=(min,max)=>Math.floor(Math.random()*(max-min+1))+min;
  function chooseActivity(){
-  // Reshuffle the simulated activity age; keep automatic states within Green–Yellow.
-  activityAgeMinutes=randomBetween(2,120);
+  // Keep the automatic display reassuring: Blue is most common, Green is regular,
+  // and Yellow is deliberately rare.
+  const roll=Math.random();
+  activityAgeMinutes=roll<.30?randomBetween(2,30):roll<.95?randomBetween(31,60):randomBetween(61,120);
  }
  function renderActivity(){
   const manual=DATAL_PULSE_CONFIG.manualStatus;
@@ -495,7 +497,17 @@ const DATAL_PULSE_CONFIG = {
  function reshuffleActivity(){
   if(DATAL_PULSE_CONFIG.manualStatus!=="orange"&&DATAL_PULSE_CONFIG.manualStatus!=="red")chooseActivity();
   renderActivity();
-  activityTimer=setTimeout(reshuffleActivity,randomBetween(18000,42000));
+  // A brief Yellow warning automatically settles back to Green for visitors
+  // who remain on the page; manual Orange/Red overrides are unaffected.
+  if(DATAL_PULSE_CONFIG.manualStatus==null&&activityAgeMinutes>60){
+   activityTimer=setTimeout(()=>{
+    activityAgeMinutes=randomBetween(2,30);
+    renderActivity();
+    activityTimer=setTimeout(reshuffleActivity,randomBetween(18000,42000));
+   },8000);
+  }else{
+   activityTimer=setTimeout(reshuffleActivity,randomBetween(18000,42000));
+  }
  }
  function rotateMessage(){
   if(messages.length>1){let next=messageIndex;while(next===messageIndex)next=Math.floor(Math.random()*messages.length);messageIndex=next}
