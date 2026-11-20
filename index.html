@@ -512,11 +512,11 @@ const DATAL_PULSE_CONFIG = {
   if(shownThisPage||(customerNotice&&customerNotice.open))return false;
   shownThisPage=true;rotateMessage();intro.hidden=false;
   requestAnimationFrame(()=>{intro.classList.add("is-visible");intro.setAttribute("aria-hidden","false");indicator.setAttribute("aria-expanded","true")});
-  clearTimeout(introTimer);introTimer=setTimeout(hideIntro,20000);
+  clearTimeout(introTimer);introTimer=setTimeout(hideIntro,10000);
   return true;
  }
  indicator.addEventListener("click",()=>{
-  if(intro.hidden){shownThisPage=true;clearTimeout(introTimer);rotateMessage();intro.hidden=false;requestAnimationFrame(()=>{intro.classList.add("is-visible");intro.setAttribute("aria-hidden","false");indicator.setAttribute("aria-expanded","true")});introTimer=setTimeout(hideIntro,20000)}
+  if(intro.hidden){shownThisPage=true;clearTimeout(introTimer);rotateMessage();intro.hidden=false;requestAnimationFrame(()=>{intro.classList.add("is-visible");intro.setAttribute("aria-hidden","false");indicator.setAttribute("aria-expanded","true")});introTimer=setTimeout(hideIntro,10000)}
   else{clearTimeout(introTimer);hideIntro()}
  });
  close.addEventListener("click",hideIntro);
