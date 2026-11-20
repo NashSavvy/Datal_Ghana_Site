@@ -52,6 +52,48 @@ header{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var
 .dots button{width:34px;height:6px;border-radius:3px;border:0;background:#2C4A86;cursor:pointer;padding:0}
 .dots button[aria-current="true"]{background:var(--cyan)}
 .arrows button{width:44px;height:44px;border-radius:50%;border:2px solid #2C4A86;background:transparent;color:#fff;font-size:20px;cursor:pointer;margin-left:8px}
+
+/* Datal Pulse: compact activity indicator and contextual introduction */
+.bundle-heading-row{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;position:relative;margin-bottom:24px}
+.bundle-heading-copy{min-width:0}
+.bundle-heading-copy .lead{margin-bottom:0}
+.pulse-wrap{position:relative;flex:0 0 auto;z-index:5}
+.pulse-indicator{display:flex;align-items:center;gap:9px;max-width:230px;padding:10px 13px;border:1px solid var(--line);border-radius:13px;background:var(--card);color:var(--ink);text-align:left;cursor:pointer;box-shadow:0 5px 16px rgba(7,26,58,.07);transition:border-color .2s,transform .2s,box-shadow .2s}
+.pulse-indicator:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(7,26,58,.11)}
+.pulse-copy{display:flex;flex-direction:column;gap:2px;min-width:0}
+.pulse-name{font:800 11px/1.2 Sora,system-ui,sans-serif;letter-spacing:.09em}
+.pulse-state{font-size:12px;line-height:1.3;color:var(--muted);white-space:normal}
+.pulse-dot{width:10px;height:10px;flex:0 0 10px;border-radius:50%;background:#8290a8;box-shadow:0 0 0 0 rgba(130,144,168,.25);animation:pulse-breathe 2.2s ease-out infinite}
+.pulse-indicator[data-status="green"] .pulse-dot{background:#16a34a;box-shadow:0 0 0 0 rgba(22,163,74,.3)}
+.pulse-indicator[data-status="blue"] .pulse-dot{background:#2563eb;box-shadow:0 0 0 0 rgba(37,99,235,.3)}
+.pulse-indicator[data-status="yellow"] .pulse-dot{background:#ca8a04;box-shadow:0 0 0 0 rgba(202,138,4,.3)}
+.pulse-indicator[data-status="orange"] .pulse-dot{background:#ea580c;box-shadow:0 0 0 0 rgba(234,88,12,.3)}
+.pulse-indicator[data-status="neutral"] .pulse-dot{background:#8290a8;animation:none}
+@keyframes pulse-breathe{0%{box-shadow:0 0 0 0 currentColor;opacity:1}65%{box-shadow:0 0 0 7px transparent;opacity:.82}100%{box-shadow:0 0 0 0 transparent;opacity:1}}
+.pulse-intro{position:absolute;right:0;top:calc(100% + 12px);width:min(340px,calc(100vw - 40px));padding:17px 18px 16px;border:1px solid var(--line);border-radius:16px;background:var(--card);color:var(--ink);box-shadow:0 18px 48px rgba(7,26,58,.2);opacity:0;transform:translateY(8px) scale(.98);pointer-events:none;transition:opacity .45s ease,transform .45s ease;z-index:20}
+.pulse-intro.is-visible{opacity:1;transform:translateY(0) scale(1);pointer-events:auto}
+.pulse-intro.is-leaving{opacity:0;transform:translateY(-5px) scale(.985);pointer-events:none}
+.pulse-intro[hidden]{display:none}
+.pulse-intro-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:9px}
+.pulse-intro-head strong{font:800 12px/1.2 Sora,system-ui,sans-serif;letter-spacing:.08em}
+.pulse-close{width:28px;height:28px;display:grid;place-items:center;border:0;border-radius:50%;background:var(--bg);color:var(--muted);font-size:19px;line-height:1;cursor:pointer}
+.pulse-intro h3{font-size:17px;line-height:1.3;margin:0 0 7px}
+.pulse-intro p{font-size:13px;line-height:1.55;color:var(--muted);margin:0}
+.pulse-intro-foot{margin-top:12px;padding-top:10px;border-top:1px solid var(--line);font:700 10px/1.3 Sora,system-ui,sans-serif;letter-spacing:.07em;color:var(--muted)}
+.pulse-intro:focus{outline:none}
+@media(max-width:600px){
+ .bundle-heading-row{align-items:flex-start;gap:10px}
+ .pulse-indicator{max-width:156px;padding:8px 9px;gap:7px}
+ .pulse-name{font-size:10px}
+ .pulse-state{font-size:10px}
+ .pulse-intro{right:0;top:calc(100% + 9px);width:min(320px,calc(100vw - 40px))}
+}
+@media(prefers-reduced-motion:reduce){
+ .pulse-dot{animation:none}
+ .pulse-indicator{transition:none}
+ .pulse-intro{transition:opacity .2s ease}
+}
+
 /* sections */
 main section{max-width:1100px;margin:auto;padding:56px 20px 0}
 h2{font-size:clamp(26px,5vw,36px);font-weight:700}
@@ -217,7 +259,21 @@ footer strong{color:#fff;font-family:Sora,system-ui,sans-serif}
 </div>
 
 <main>
-<section id="bundles"><h2>Data bundles</h2><p class="lead">Choose your network to see our starting price, then explore every offer in our store.</p>
+<section id="bundles">
+<div class="bundle-heading-row">
+ <div class="bundle-heading-copy"><h2>Data bundles</h2><p class="lead">Choose your network to see our starting price, then explore every offer in our store.</p></div>
+ <div class="pulse-wrap">
+  <button class="pulse-indicator" id="datalPulse" type="button" data-status="neutral" aria-label="Datal Pulse activity status. Open About Datal Pulse." aria-expanded="false" aria-controls="pulseIntro">
+   <span class="pulse-dot" aria-hidden="true"></span><span class="pulse-copy"><span class="pulse-name">DATAL PULSE</span><span class="pulse-state" id="pulseState">Activity status being updated</span></span>
+  </button>
+  <aside class="pulse-intro" id="pulseIntro" role="status" aria-live="polite" aria-hidden="true" hidden>
+   <div class="pulse-intro-head"><strong>DATAL PULSE</strong><button class="pulse-close" id="pulseClose" type="button" aria-label="Close Datal Pulse introduction">×</button></div>
+   <h3 id="pulseMessage">Your connection starts here.</h3>
+   <p>Datal Pulse is our little way of keeping you informed about our service activity and our commitment to making your data purchases simple and convenient.</p>
+   <div class="pulse-intro-foot">CONNECTED EVERYWHERE.</div>
+  </aside>
+ </div>
+</div>
 <div class="network-showcase">
 <div class="network-content">
 <div class="tabs" role="tablist" id="tabs" aria-label="Choose a mobile network"></div>
@@ -301,6 +357,79 @@ function show(o){
 }
 OFFERS.forEach((o,n)=>{const b=document.createElement("button");b.role="tab";b.textContent=o.name;b.dataset.id=o.id;b.onclick=()=>show(o);tabs.append(b)});
 show(OFFERS[0]);
+
+
+// Datal Pulse — manual activity source with independently rotating brand messages.
+// Update this ISO timestamp only after a delivery has been confirmed.
+// Example: "2026-11-20T09:15:00+00:00". Keep null until a real confirmed delivery is recorded.
+const DATAL_PULSE_CONFIG = {
+ lastSuccessfulDeliveryAt: null
+};
+(function initDatalPulse(){
+ const section=document.getElementById("bundles");
+ const indicator=document.getElementById("datalPulse");
+ const state=document.getElementById("pulseState");
+ const intro=document.getElementById("pulseIntro");
+ const close=document.getElementById("pulseClose");
+ const message=document.getElementById("pulseMessage");
+ if(!section||!indicator||!state||!intro||!close||!message)return;
+ const messages=[
+  "Your connection starts here.",
+  "Simple. Reliable. Connected.",
+  "Your data, your way.",
+  "Making connectivity easier.",
+  "Connected Everywhere."
+ ];
+ let messageIndex=Math.floor(Math.random()*messages.length);
+ let introTimer=null,rotationTimer=null,shownThisPage=false,hideTimer=null;
+ function renderActivity(){
+  const raw=DATAL_PULSE_CONFIG.lastSuccessfulDeliveryAt;
+  if(!raw){indicator.dataset.status="neutral";state.textContent="Activity updates";indicator.setAttribute("aria-label","Datal Pulse. Activity updates. Open About Datal Pulse.");return}
+  const stamp=Date.parse(raw);
+  if(!Number.isFinite(stamp)||stamp>Date.now()){indicator.dataset.status="neutral";state.textContent="Activity updates";return}
+  const minutes=Math.floor((Date.now()-stamp)/60000);
+  let status="neutral";
+  if(minutes<=30)status="green";
+  else if(minutes<=60)status="blue";
+  else if(minutes<=120)status="yellow";
+  else if(minutes<=180)status="orange";
+  indicator.dataset.status=status;
+  const age=minutes<1?"less than a minute ago":minutes<60?minutes+" min ago":Math.floor(minutes/60)+" hr"+(Math.floor(minutes/60)===1?"":"s")+" ago";
+  state.textContent=status==="neutral"?"No recent delivery recorded":"Last confirmed delivery: "+age;
+  indicator.setAttribute("aria-label","Datal Pulse. "+state.textContent+". Open About Datal Pulse.");
+ }
+ function rotateMessage(){
+  if(messages.length>1){let next=messageIndex;while(next===messageIndex)next=Math.floor(Math.random()*messages.length);messageIndex=next}
+  message.textContent=messages[messageIndex];
+ }
+ function hideIntro(){
+  if(intro.hidden)return;
+  intro.classList.remove("is-visible");intro.classList.add("is-leaving");
+  indicator.setAttribute("aria-expanded","false");intro.setAttribute("aria-hidden","true");
+  clearTimeout(hideTimer);
+  hideTimer=setTimeout(()=>{intro.hidden=true;intro.classList.remove("is-leaving")},500);
+ }
+ function showIntro(){
+  if(shownThisPage)return;
+  shownThisPage=true;rotateMessage();intro.hidden=false;
+  requestAnimationFrame(()=>{intro.classList.add("is-visible");intro.setAttribute("aria-hidden","false");indicator.setAttribute("aria-expanded","true")});
+  clearTimeout(introTimer);introTimer=setTimeout(hideIntro,40000);
+ }
+ indicator.addEventListener("click",()=>{
+  if(intro.hidden){shownThisPage=true;clearTimeout(introTimer);rotateMessage();intro.hidden=false;requestAnimationFrame(()=>{intro.classList.add("is-visible");intro.setAttribute("aria-hidden","false");indicator.setAttribute("aria-expanded","true")});introTimer=setTimeout(hideIntro,40000)}
+  else{clearTimeout(introTimer);hideIntro()}
+ });
+ close.addEventListener("click",hideIntro);
+ document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!intro.hidden)hideIntro()});
+ const observer=new IntersectionObserver(entries=>{
+  if(entries.some(entry=>entry.isIntersecting)){showIntro();observer.disconnect()}
+ },{threshold:.18});
+ observer.observe(section);
+ renderActivity();
+ rotationTimer=setInterval(rotateMessage,20000);
+ setInterval(renderActivity,60000);
+ document.addEventListener("visibilitychange",()=>{if(!document.hidden)renderActivity()});
+})();
 
 // Two-image workplace carousel: circular progress doubles as the pause/play control.
 const networkCarousel=document.getElementById("networkCarousel");
