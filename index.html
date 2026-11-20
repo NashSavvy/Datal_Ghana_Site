@@ -68,6 +68,7 @@ header{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var
 .pulse-source{font:700 8px/1.2 Sora,system-ui,sans-serif;letter-spacing:.07em;color:var(--muted)}
 .pulse-name{font:800 11px/1.2 Sora,system-ui,sans-serif;letter-spacing:.09em}
 .pulse-state{font-size:12px;line-height:1.3;color:var(--muted);white-space:normal}
+.pulse-condition{font:800 10px/1.35 Sora,system-ui,sans-serif;color:var(--ink);white-space:normal}
 .pulse-dot{width:10px;height:10px;flex:0 0 10px;border-radius:50%;background:#8290a8;box-shadow:0 0 0 0 rgba(130,144,168,.25);animation:pulse-breathe 2.2s ease-out infinite}
 .pulse-indicator[data-status="green"] .pulse-dot{background:#16a34a;box-shadow:0 0 0 0 rgba(22,163,74,.3)}
 .pulse-indicator[data-status="blue"] .pulse-dot{background:#2563eb;box-shadow:0 0 0 0 rgba(37,99,235,.3)}
@@ -301,7 +302,7 @@ footer strong{color:#fff;font-family:Sora,system-ui,sans-serif}
  <div class="bundle-heading-copy"><h2>Data bundles</h2><p class="lead">Choose your network to see our starting price, then explore every offer in our store.</p></div>
  <div class="pulse-wrap">
   <button class="pulse-indicator" id="datalPulse" type="button" data-status="blue" aria-label="Datal Pulse simulated purchase activity. Open About Datal Pulse." aria-expanded="false" aria-controls="pulseIntro">
-   <span class="pulse-dot" aria-hidden="true"></span><span class="pulse-copy"><span class="pulse-kicker">PURCHASE ACTIVITY</span><span class="pulse-name">DATAL PULSE</span><span class="pulse-live"><span class="pulse-live-dot" aria-hidden="true"></span>ACTIVE</span><span class="pulse-state" id="pulseState">Recent purchase activity</span><span class="pulse-age" id="pulseAge">Activity pattern: 15 min ago</span><span class="pulse-source">SIMULATED ACTIVITY SIGNAL</span></span>
+   <span class="pulse-dot" aria-hidden="true"></span><span class="pulse-copy"><span class="pulse-kicker">PURCHASE ACTIVITY</span><span class="pulse-name">DATAL PULSE</span><span class="pulse-live"><span class="pulse-live-dot" aria-hidden="true"></span>ACTIVE</span><span class="pulse-state" id="pulseState">Recent purchase activity</span><span class="pulse-age" id="pulseAge">Activity pattern: 15 min ago</span><span class="pulse-condition" id="pulseCondition">Expected Traffic — Manageable Delays</span><span class="pulse-source">SIMULATED ACTIVITY SIGNAL</span></span>
   </button>
   <aside class="pulse-intro" id="pulseIntro" role="status" aria-live="polite" aria-hidden="true" hidden>
    <div class="pulse-intro-head"><strong>DATAL PULSE</strong><button class="pulse-close" id="pulseClose" type="button" aria-label="Close Datal Pulse introduction">×</button></div>
@@ -453,10 +454,11 @@ const DATAL_PULSE_CONFIG = {
  const indicator=document.getElementById("datalPulse");
  const state=document.getElementById("pulseState");
  const ageLabel=document.getElementById("pulseAge");
+ const condition=document.getElementById("pulseCondition");
  const intro=document.getElementById("pulseIntro");
  const close=document.getElementById("pulseClose");
  const message=document.getElementById("pulseMessage");
- if(!section||!indicator||!state||!ageLabel||!intro||!close||!message)return;
+ if(!section||!indicator||!state||!ageLabel||!condition||!intro||!close||!message)return;
  const messages=[
   "Your connection starts here.",
   "Simple. Reliable. Connected.",
@@ -480,10 +482,12 @@ const DATAL_PULSE_CONFIG = {
   }else{
    status=activityAgeMinutes<=30?"green":activityAgeMinutes<=60?"blue":"yellow";
   }
+  const statusMessages={green:"Normal Traffic",blue:"Expected Traffic — Manageable Delays",yellow:"High Traffic — Delays Expected",orange:"Heavy Traffic — Extended Delays Expected",red:"Very Heavy Traffic — Significant Delays Expected"};
   indicator.dataset.status=status;
   state.textContent="Recent purchase activity";
   ageLabel.textContent="Activity pattern: "+(activityAgeMinutes<60?activityAgeMinutes+" min ago":Math.floor(activityAgeMinutes/60)+" hr"+(Math.floor(activityAgeMinutes/60)===1?"":"s")+" ago");
-  indicator.setAttribute("aria-label","Datal Pulse purchase activity. Active. Simulated activity pattern: "+ageLabel.textContent+". Open About Datal Pulse.");
+  condition.textContent=statusMessages[status];
+  indicator.setAttribute("aria-label","Datal Pulse. Active. "+statusMessages[status]+". Simulated activity pattern: "+ageLabel.textContent+". Open About Datal Pulse.");
  }
  function reshuffleActivity(){
   if(DATAL_PULSE_CONFIG.manualStatus!=="orange"&&DATAL_PULSE_CONFIG.manualStatus!=="red")chooseActivity();
