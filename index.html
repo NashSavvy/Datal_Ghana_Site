@@ -273,12 +273,12 @@ footer strong{color:#fff;font-family:Sora,system-ui,sans-serif}
 
 
 /* Public WhatsApp community announcement */
-.community-banner{position:fixed;top:calc(18px + env(safe-area-inset-top,0px));right:18px;z-index:30;display:flex;align-items:center;gap:10px;max-width:min(360px,calc(100vw - 28px));padding:8px;border:1px solid rgba(37,211,102,.28);border-radius:999px;background:rgba(7,26,58,.97);color:#fff;box-shadow:0 12px 32px rgba(3,14,34,.28);backdrop-filter:blur(14px);transition:border-radius .2s,box-shadow .2s}
+.community-banner{position:absolute;top:50%;right:0;z-index:8;display:flex;align-items:center;gap:10px;max-width:min(360px,calc(100% - 20px));padding:8px 8px 8px 10px;border:1px solid rgba(37,211,102,.32);border-right:0;border-radius:18px 0 0 18px;background:rgba(7,26,58,.97);color:#fff;box-shadow:0 12px 32px rgba(3,14,34,.3);backdrop-filter:blur(14px);transform:translateY(-50%);transition:border-radius .2s,box-shadow .2s}
 .community-trigger{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:42px;padding:10px 15px;border:0;border-radius:999px;background:#25D366;color:#062b18;font:800 12px/1.2 Sora,system-ui,sans-serif;white-space:nowrap;cursor:pointer}
 .community-trigger:hover{filter:brightness(1.08)}
 .community-trigger svg{width:19px;height:19px;fill:currentColor}
-.community-panel{display:none;align-items:center;gap:10px;min-width:0;padding:3px 5px 3px 2px}
-.community-banner.is-open{width:min(360px,calc(100vw - 28px));align-items:flex-start;border-radius:17px}
+.community-panel{display:none;align-items:center;gap:10px;min-width:0;padding:3px 2px}
+.community-banner.is-open{width:min(360px,calc(100% - 12px));align-items:center;border-radius:17px 0 0 17px}
 .community-banner.is-open .community-trigger{display:none}
 .community-banner.is-open .community-panel{display:flex}
 .community-copy{min-width:0;flex:1}
@@ -288,9 +288,9 @@ footer strong{color:#fff;font-family:Sora,system-ui,sans-serif}
 .community-dismiss{width:25px;height:25px;flex:0 0 25px;display:grid;place-items:center;border:0;border-radius:50%;background:rgba(255,255,255,.1);color:#dce8ff;font-size:18px;line-height:1;cursor:pointer}
 .community-dismiss:hover{background:rgba(255,255,255,.2)}
 @media(max-width:520px){
- .community-banner{top:calc(12px + env(safe-area-inset-top,0px));right:10px;max-width:calc(100vw - 20px);padding:6px}
+ .community-banner{max-width:calc(100% - 8px);padding:6px 6px 6px 8px}
  .community-trigger{min-height:39px;padding:9px 13px;font-size:11px}
- .community-banner.is-open{width:min(340px,calc(100vw - 20px))}
+ .community-banner.is-open{width:calc(100% - 8px)}
  .community-panel{gap:7px}
  .community-copy strong{font-size:11px}
  .community-copy span{font-size:10px}
@@ -323,6 +323,21 @@ footer strong{color:#fff;font-family:Sora,system-ui,sans-serif}
 <div class="slide s3"><svg class="net" aria-hidden="true"><use href="#net"/></svg><h1>Results checkers, sorted.</h1><p>Get your BECE or WASSCE results checker voucher without queuing.</p><div class="cta"><a class="btn" href="#vouchers">Get a voucher</a></div></div>
 </div>
 <div class="ctrl"><div class="dots" id="dots"></div><div class="arrows"><button id="prev" aria-label="Previous slide">‹</button><button id="next" aria-label="Next slide">›</button></div></div>
+<!-- Public invitation to the DATAL GHANA WhatsApp community -->
+<aside class="community-banner" id="communityBanner" aria-label="DATAL GHANA WhatsApp community invitation">
+ <button class="community-trigger" id="communityTrigger" type="button" aria-expanded="false" aria-controls="communityPanel">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2a9.85 9.85 0 0 0-8.42 14.97L2.3 22l5.2-1.36A9.95 9.95 0 1 0 12.04 2Zm0 18.1a8.1 8.1 0 0 1-4.13-1.13l-.3-.18-3.08.8.82-3-.2-.31A8.12 8.12 0 1 1 12.04 20.1Z"/></svg>
+  Join Community
+ </button>
+ <div class="community-panel" id="communityPanel">
+  <div class="community-copy"><strong>Join the DATAL GHANA Community</strong><span>Get updates, offers and important service announcements.</span></div>
+  <a class="community-join" href="https://chat.whatsapp.com/KeA0Hwmhuv6ArXzw5ja0si" target="_blank" rel="noopener noreferrer">Join ↗</a>
+  <button class="community-dismiss" id="communityDismiss" type="button" aria-label="Close community invitation">×</button>
+ </div>
+</aside>
+<script>
+(()=>{const banner=document.getElementById("communityBanner"),trigger=document.getElementById("communityTrigger"),dismiss=document.getElementById("communityDismiss");trigger?.addEventListener("click",()=>{const open=banner.classList.toggle("is-open");trigger.setAttribute("aria-expanded",String(open))});dismiss?.addEventListener("click",()=>{banner?.classList.remove("is-open");trigger?.setAttribute("aria-expanded","false")});document.addEventListener("keydown",e=>{if(e.key==="Escape"&&banner?.classList.contains("is-open")){banner.classList.remove("is-open");trigger?.setAttribute("aria-expanded","false")}})})();
+</script>
 </div>
 
 <main>
@@ -407,21 +422,7 @@ footer strong{color:#fff;font-family:Sora,system-ui,sans-serif}
 
 
 
-<!-- Public invitation to the DATAL GHANA WhatsApp community -->
-<aside class="community-banner" id="communityBanner" aria-label="DATAL GHANA WhatsApp community invitation">
- <button class="community-trigger" id="communityTrigger" type="button" aria-expanded="false" aria-controls="communityPanel">
-  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2a9.85 9.85 0 0 0-8.42 14.97L2.3 22l5.2-1.36A9.95 9.95 0 1 0 12.04 2Zm0 18.1a8.1 8.1 0 0 1-4.13-1.13l-.3-.18-3.08.8.82-3-.2-.31A8.12 8.12 0 1 1 12.04 20.1Z"/></svg>
-  Join Community
- </button>
- <div class="community-panel" id="communityPanel">
-  <div class="community-copy"><strong>Join the DATAL GHANA Community</strong><span>Get updates, offers and important service announcements.</span></div>
-  <a class="community-join" href="https://chat.whatsapp.com/KeA0Hwmhuv6ArXzw5ja0si" target="_blank" rel="noopener noreferrer">Join ↗</a>
-  <button class="community-dismiss" id="communityDismiss" type="button" aria-label="Close community invitation">×</button>
- </div>
-</aside>
-<script>
-(()=>{const banner=document.getElementById("communityBanner"),trigger=document.getElementById("communityTrigger"),dismiss=document.getElementById("communityDismiss");trigger?.addEventListener("click",()=>{const open=banner.classList.toggle("is-open");trigger.setAttribute("aria-expanded",String(open))});dismiss?.addEventListener("click",()=>banner?.remove());document.addEventListener("keydown",e=>{if(e.key==="Escape"&&banner?.classList.contains("is-open")){banner.classList.remove("is-open");trigger?.setAttribute("aria-expanded","false")}})})();
-</script>
+
 
 <dialog class="notice-dialog" id="customerNotice" aria-labelledby="noticeTitle" aria-describedby="noticeIntro">
  <div class="notice-head"><div><p class="notice-kicker">Important customer notice</p><h2 id="noticeTitle">Read Before You Proceed</h2><p>Please review these purchase and delivery details before shopping.</p></div><button class="notice-sound" id="noticeSound" type="button" aria-label="Play alert sound">🔔 Play alert</button></div>
