@@ -242,6 +242,30 @@ footer>.footer-inner{max-width:1100px;margin:auto;display:flex;flex-wrap:wrap;ga
 footer strong{color:#fff;font-family:Sora,system-ui,sans-serif}
 @media(prefers-reduced-motion:reduce){.track{transition:none}}
 
+/* First-stage read-and-acknowledge notice */
+.read-dialog{width:min(680px,calc(100% - 28px));max-width:680px;max-height:min(88dvh,820px);overflow:hidden}
+.read-dialog[open]{display:flex;flex-direction:column}
+.read-dialog .notice-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
+.read-dialog .notice-head p:not(.notice-kicker){margin:7px 0 0;color:#d4e2fa;font-size:14px}
+.read-dialog .notice-body{flex:1 1 auto;min-height:0;overflow-y:auto;overscroll-behavior:contain}
+.read-dialog .notice-welcome{margin:0 0 17px;color:var(--muted)}
+.read-dialog .notice-section{margin:0 0 18px}
+.read-dialog .notice-section h3{margin:0 0 9px;font-size:16px;color:var(--ink)}
+.read-dialog .notice-steps{margin:0;padding-left:23px;color:var(--muted)}
+.read-dialog .notice-steps li{padding:3px 0 3px 3px}
+.read-dialog .notice-delivery{padding:15px 16px;border:1px solid #efc75c;border-left:5px solid #e5a900;border-radius:13px;background:#fff8df;color:#34290d}
+.read-dialog .notice-delivery h3{color:#6d4b00}
+.read-dialog .notice-delivery p{margin:7px 0;color:#493a17}
+.read-dialog .notice-delivery a{color:#064eaa;font-weight:800;text-decoration:underline}
+.read-dialog .notice-delivery .delay{font-weight:900;color:#9a3d00}
+.read-footer{flex:0 0 auto;border-top:1px solid var(--line)}
+.notice-ack{display:flex;align-items:flex-start;gap:10px;color:var(--ink);font-size:14px;font-weight:650;cursor:pointer}
+.notice-ack input{width:19px;height:19px;flex:0 0 19px;margin:2px 0 0;accent-color:var(--blue)}
+.notice-continue:disabled{background:#9aa8bd;cursor:not-allowed;opacity:.75}
+.notice-footnote{margin:9px 0 0;text-align:center;color:var(--muted);font-size:12px}
+.read-footer .notice-continue{margin-top:14px}
+@media(max-width:520px){.read-dialog .notice-head{padding:18px 17px 14px}.read-dialog .notice-body{padding:17px 17px 10px}.read-footer{padding:13px 17px 17px}.read-dialog .notice-delivery{padding:13px}}
+@media(max-height:650px){.read-dialog{max-height:94dvh}.read-dialog .notice-head{padding-top:13px;padding-bottom:11px}.read-footer{padding-top:10px;padding-bottom:12px}}
 /* Mandatory MTN UP2U stock notice */
 .notice-dialog{box-sizing:border-box;width:min(560px,calc(100% - 28px));max-width:560px;max-height:min(88dvh,720px);padding:0;border:1px solid var(--line);border-radius:20px;background:var(--card);color:var(--ink);box-shadow:0 24px 80px rgba(0,0,0,.4);overflow:auto}
 .notice-dialog[open]{display:block}
@@ -475,6 +499,27 @@ footer strong{color:#fff;font-family:Sora,system-ui,sans-serif}
 
 
 
+<dialog class="notice-dialog read-dialog" id="readBeforeProceed" aria-labelledby="readNoticeTitle" aria-describedby="readNoticeIntro">
+ <div class="notice-head">
+  <div>
+   <p class="notice-kicker">Important customer notice</p>
+   <h2 id="readNoticeTitle">Read Before You Proceed</h2>
+   <p>Please review these purchase and delivery details before shopping.</p>
+  </div>
+ </div>
+ <div class="notice-body">
+  <p class="notice-welcome" id="readNoticeIntro"><strong>WELCOME TO DATAL GHANA!</strong><br>Get affordable data bundles on MTN, Telecel and AirtelTigo (AT) at competitive prices.</p>
+  <section class="notice-section" aria-labelledby="readPurchaseTitle"><h3 id="readPurchaseTitle">🛒 How to purchase</h3><ol class="notice-steps"><li>Select your preferred network: MTN, Telecel or AT.</li><li>Choose your desired data bundle.</li><li>Enter the recipient's phone number correctly.</li><li>Review your order details and confirm your purchase.</li><li>Complete payment and wait for your bundle delivery.</li></ol></section>
+  <section class="notice-section notice-delivery" aria-labelledby="readDeliveryTitle"><h3 id="readDeliveryTitle">⚠️ Important delivery notice</h3><p>📢 MTN bundles may occasionally experience delays due to network traffic or technical issues.</p><p class="delay">⏳ In such cases, delivery may take between 30 minutes and 24 hours.</p><p>💡 We encourage you to purchase ahead of time to avoid inconvenience.</p><p>✅ Before payment, verify that the recipient's number is valid for the selected MTN offer using <a href="https://www.datacoregh.com/check-mtn?offer=mtn" target="_blank" rel="noopener noreferrer">Check MTN numbers | DataCoreGH</a>.</p></section>
+  <p class="notice-welcome"><strong>Thank you for choosing DATAL GHANA!</strong><br>🌍 Connected Everywhere.</p>
+ </div>
+ <div class="notice-footer read-footer">
+  <label class="notice-ack"><input id="readNoticeAcknowledge" type="checkbox"><span>I have read and understood the purchase instructions and delivery notice.</span></label>
+  <button class="notice-continue" id="readNoticeContinue" type="button" disabled>I have read and understood — Continue</button>
+  <p class="notice-footnote">You must acknowledge this notice before continuing to the website.</p>
+ </div>
+</dialog>
+
 <dialog class="notice-dialog" id="customerNotice" aria-labelledby="noticeTitle" aria-describedby="noticeIntro">
  <div class="notice-head">
   <p class="notice-kicker">Official Platform Notice</p>
@@ -493,14 +538,26 @@ footer strong{color:#fff;font-family:Sora,system-ui,sans-serif}
 
 <script>
 
- // Mandatory notice: shown on every visit; acceptance lasts only for this page load.
+ // Two mandatory notices, shown in order on every visit. No acceptance is stored.
+ const readBeforeProceed=document.getElementById("readBeforeProceed");
+ const readNoticeAcknowledge=document.getElementById("readNoticeAcknowledge");
+ const readNoticeContinue=document.getElementById("readNoticeContinue");
  const customerNotice=document.getElementById("customerNotice");
  const noticeContinue=document.getElementById("noticeContinue");
- if(customerNotice&&!customerNotice.open){customerNotice.showModal()}
+ if(readBeforeProceed&&!readBeforeProceed.open){readBeforeProceed.showModal()}
+ readNoticeAcknowledge?.addEventListener("change",()=>{
+  readNoticeContinue.disabled=!readNoticeAcknowledge.checked;
+ });
+ readNoticeContinue?.addEventListener("click",()=>{
+  if(!readNoticeAcknowledge?.checked)return;
+  readBeforeProceed.close();
+  customerNotice?.showModal();
+ });
  noticeContinue?.addEventListener("click",()=>{
   customerNotice?.close();
   document.dispatchEvent(new Event("datalCustomerNoticeAccepted"));
  });
+ readBeforeProceed?.addEventListener("cancel",event=>event.preventDefault());
  customerNotice?.addEventListener("cancel",event=>event.preventDefault());
 
 // EDIT THESE
