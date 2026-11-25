@@ -242,36 +242,21 @@ footer>.footer-inner{max-width:1100px;margin:auto;display:flex;flex-wrap:wrap;ga
 footer strong{color:#fff;font-family:Sora,system-ui,sans-serif}
 @media(prefers-reduced-motion:reduce){.track{transition:none}}
 
-/* Mandatory customer read-before-proceed notice */
-.notice-dialog{box-sizing:border-box;width:min(680px,calc(100% - 28px));max-width:680px;height:auto;max-height:min(88dvh,820px);padding:0;border:1px solid var(--line);border-radius:20px;background:var(--card);color:var(--ink);box-shadow:0 24px 80px rgba(0,0,0,.38);overflow:hidden}
-.notice-dialog[open]{display:flex;flex-direction:column}
-.notice-dialog::backdrop{background:rgba(3,12,30,.78);backdrop-filter:blur(5px)}
-.notice-head{display:flex;flex:0 0 auto;align-items:flex-start;justify-content:space-between;gap:16px;padding:22px 24px 16px;background:var(--navy);color:#fff}
-.notice-kicker{margin:0 0 5px;color:#9edff0;font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
-.notice-head h2{font-size:clamp(22px,4vw,29px);line-height:1.2;color:#fff}
-.notice-head p{margin:7px 0 0;color:#d4e2fa;font-size:14px}
-.notice-sound{flex:0 0 auto;border:1px solid rgba(255,255,255,.42);border-radius:999px;padding:8px 12px;background:rgba(255,255,255,.1);color:#fff;font:700 12px system-ui;cursor:pointer}
-.notice-body{flex:1 1 auto;min-height:0;max-height:none;overflow-y:auto;overscroll-behavior:contain;padding:20px 24px 12px}
-.notice-welcome{margin:0 0 17px;color:var(--muted)}
-.notice-section{margin:0 0 18px}
-.notice-section h3{margin:0 0 9px;font-size:16px;color:var(--ink)}
-.notice-steps{margin:0;padding-left:23px;color:var(--muted)}
-.notice-steps li{padding:3px 0 3px 3px}
-.notice-delivery{padding:15px 16px;border:1px solid #efc75c;border-left:5px solid #e5a900;border-radius:13px;background:#fff8df;color:#34290d}
-.notice-delivery h3{color:#6d4b00}
-.notice-delivery p{margin:7px 0;color:#493a17}
-.notice-delivery a{color:#064eaa;font-weight:800;text-decoration:underline}
-.notice-delivery .delay{font-weight:900;color:#9a3d00}
-.notice-footer{box-sizing:border-box;flex:0 0 auto;padding:14px 24px 20px;border-top:1px solid var(--line);background:var(--card)}
-.notice-ack{display:flex;align-items:flex-start;gap:10px;color:var(--ink);font-size:14px;font-weight:650;cursor:pointer}
-.notice-ack input{width:19px;height:19px;flex:0 0 19px;margin:2px 0 0;accent-color:var(--blue)}
-.notice-continue{display:block;box-sizing:border-box;width:100%;min-height:48px;margin-top:14px;padding:13px 18px;border:0;border-radius:999px;background:var(--blue);color:#fff;font-size:15px;line-height:1.35;font-weight:800;white-space:normal;cursor:pointer}
-.notice-continue:disabled{background:#9aa8bd;cursor:not-allowed;opacity:.75}
-.notice-footnote{margin:9px 0 0;text-align:center;color:var(--muted);font-size:12px}
-@media(max-width:520px){.notice-head{padding:18px 17px 14px}.notice-head h2{font-size:22px}.notice-sound{font-size:11px;padding:7px 9px}.notice-body{padding:17px 17px 10px}.notice-footer{padding:13px 17px 17px}.notice-delivery{padding:13px}}
-@media(max-height:650px){.notice-dialog{max-height:94dvh}.notice-head{padding-top:13px;padding-bottom:11px}.notice-footer{padding-top:10px;padding-bottom:12px}}
-
-
+/* Mandatory MTN UP2U stock notice */
+.notice-dialog{box-sizing:border-box;width:min(560px,calc(100% - 28px));max-width:560px;max-height:min(88dvh,720px);padding:0;border:1px solid var(--line);border-radius:20px;background:var(--card);color:var(--ink);box-shadow:0 24px 80px rgba(0,0,0,.4);overflow:auto}
+.notice-dialog[open]{display:block}
+.notice-dialog::backdrop{background:rgba(3,12,30,.82);backdrop-filter:blur(5px)}
+.notice-head{padding:22px 24px 18px;background:var(--navy);color:#fff}
+.notice-kicker{margin:0 0 8px;color:#9edff0;font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+.notice-head h2{margin:0;font:800 clamp(21px,4vw,27px)/1.2 Sora,system-ui,sans-serif;color:#fff}
+.notice-body{padding:22px 24px 12px;color:var(--ink)}
+.notice-body p{margin:0 0 14px;color:var(--muted);line-height:1.65}
+.notice-body p:last-child{margin-bottom:8px}
+.notice-body .notice-stock-title{margin:0 0 14px;color:#c0392b;font-size:17px;font-weight:900;line-height:1.35}
+.notice-footer{padding:12px 24px 22px;border-top:1px solid var(--line);background:var(--card)}
+.notice-continue{display:block;width:100%;min-height:49px;padding:13px 18px;border:0;border-radius:999px;background:var(--blue);color:#fff;font-size:15px;font-weight:850;cursor:pointer}
+.notice-continue:hover{filter:brightness(1.08)}
+@media(max-width:520px){.notice-head{padding:19px 18px 16px}.notice-body{padding:19px 18px 10px}.notice-footer{padding:12px 18px 18px}}
 /* Draggable WhatsApp community launcher: fixed to the viewport, not the page */
 .community-banner{position:fixed;isolation:isolate;top:108px;right:auto;bottom:auto;left:8px;z-index:50;width:64px;height:64px;max-width:calc(100vw - 24px);padding:0;border:1px solid rgba(255,255,255,.35);border-radius:50%;background:#25D366;color:#062b18;box-shadow:0 8px 26px rgba(3,14,34,.3);touch-action:none;user-select:none;-webkit-user-select:none}
 .community-banner::before,.community-banner::after{content:"";position:absolute;inset:-2px;border:2px solid rgba(255,255,255,.9);border-radius:50%;opacity:0;z-index:-1;pointer-events:none;transform:scale(.82);animation:community-splash 1.8s ease-out infinite}
@@ -491,47 +476,29 @@ footer strong{color:#fff;font-family:Sora,system-ui,sans-serif}
 
 
 <dialog class="notice-dialog" id="customerNotice" aria-labelledby="noticeTitle" aria-describedby="noticeIntro">
- <div class="notice-head"><div><p class="notice-kicker">Important customer notice</p><h2 id="noticeTitle">Read Before You Proceed</h2><p>Please review these purchase and delivery details before shopping.</p></div><button class="notice-sound" id="noticeSound" type="button" aria-label="Play alert sound">🔔 Play alert</button></div>
- <div class="notice-body">
-  <p class="notice-welcome" id="noticeIntro"><strong>WELCOME TO DATAL GHANA!</strong><br>Get affordable data bundles on MTN, Telecel and AirtelTigo (AT) at competitive prices.</p>
-  <section class="notice-section" aria-labelledby="noticePurchaseTitle"><h3 id="noticePurchaseTitle">🛒 How to purchase</h3><ol class="notice-steps"><li>Select your preferred network: MTN, Telecel or AT.</li><li>Choose your desired data bundle.</li><li>Enter the recipient's phone number correctly.</li><li>Review your order details and confirm your purchase.</li><li>Complete payment and wait for your bundle delivery.</li></ol></section>
-  <section class="notice-section notice-delivery" aria-labelledby="noticeDeliveryTitle"><h3 id="noticeDeliveryTitle">⚠️ Important delivery notice</h3><p>📢 MTN bundles may occasionally experience delays due to network traffic or technical issues.</p><p class="delay">⏳ In such cases, delivery may take between 30 minutes and 24 hours.</p><p>💡 We encourage you to purchase ahead of time to avoid inconvenience.</p><p>✅ Before payment, verify that the recipient's number is valid for the selected MTN offer using <a href="https://www.datacoregh.com/check-mtn?offer=mtn" target="_blank" rel="noopener noreferrer">Check MTN numbers | DataCoreGH</a>.</p></section>
-  <p class="notice-welcome"><strong>Thank you for choosing DATAL GHANA!</strong><br>🌍 Connected Everywhere.</p>
+ <div class="notice-head">
+  <p class="notice-kicker">Official Platform Notice</p>
+  <h2 id="noticeTitle">MTN UP2U BUNDLES OUT OF STOCK</h2>
  </div>
- <div class="notice-footer"><label class="notice-ack"><input id="noticeAcknowledge" type="checkbox"><span>I have read and understood the purchase instructions and delivery notice.</span></label><button class="notice-continue" id="noticeContinue" type="button" disabled>I have read and understood — Continue</button><p class="notice-footnote">You must acknowledge this notice before continuing to the website.</p></div>
+ <div class="notice-body">
+  <p id="noticeIntro">Our monthly MTN UP2U distribution limit has been reached. This service will remain unavailable until <strong>1st December 2026</strong>.</p>
+  <p>All MTN UP2U packages are currently marked out of stock. Please do not place orders expecting immediate delivery when we reopen.</p>
+  <p>All other services remain active, including Standard Bundles across all networks, with instant delivery.</p>
+  <p>Thank you for your understanding.</p>
+ </div>
+ <div class="notice-footer">
+  <button class="notice-continue" id="noticeContinue" type="button">Got it, thanks!</button>
+ </div>
 </dialog>
 
 <script>
 
- // Mandatory notice: acknowledgement is required on every page visit (no persistent "read" flag).
+ // Mandatory notice: shown on every visit; acceptance lasts only for this page load.
  const customerNotice=document.getElementById("customerNotice");
- const noticeAcknowledge=document.getElementById("noticeAcknowledge");
  const noticeContinue=document.getElementById("noticeContinue");
- const noticeSound=document.getElementById("noticeSound");
- function playNoticeBeep(){
-  try{
-   const AudioContextClass=window.AudioContext||window.webkitAudioContext;
-   if(!AudioContextClass)return;
-   const audio=new AudioContextClass();
-   if(audio.state!=="running"){audio.close();return}
-   [0,.18].forEach(offset=>{
-    const oscillator=audio.createOscillator(),gain=audio.createGain();
-    oscillator.type="sine";oscillator.frequency.value=880;
-    gain.gain.setValueAtTime(.0001,audio.currentTime+offset);
-    gain.gain.exponentialRampToValueAtTime(.12,audio.currentTime+offset+.015);
-    gain.gain.exponentialRampToValueAtTime(.0001,audio.currentTime+offset+.11);
-    oscillator.connect(gain);gain.connect(audio.destination);
-    oscillator.start(audio.currentTime+offset);oscillator.stop(audio.currentTime+offset+.12);
-   });
-   window.setTimeout(()=>audio.close(),500);
-  }catch(error){/* Sound is optional; the mandatory visual notice remains. */}
- }
- if(customerNotice&&!customerNotice.open){customerNotice.showModal();playNoticeBeep()}
- noticeAcknowledge?.addEventListener("change",()=>{noticeContinue.disabled=!noticeAcknowledge.checked});
- noticeSound?.addEventListener("click",playNoticeBeep);
+ if(customerNotice&&!customerNotice.open){customerNotice.showModal()}
  noticeContinue?.addEventListener("click",()=>{
-  if(!noticeAcknowledge.checked)return;
-  customerNotice.close();
+  customerNotice?.close();
   document.dispatchEvent(new Event("datalCustomerNoticeAccepted"));
  });
  customerNotice?.addEventListener("cancel",event=>event.preventDefault());
